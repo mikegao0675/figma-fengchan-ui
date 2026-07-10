@@ -1,0 +1,10 @@
+{
+  "description": "Provides a responsive data dashboard for e-commerce leaders to monitor sales, inventory, and alerts across channels with clear visual insights on mobile and desktop.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
