@@ -3,6 +3,7 @@ export type StockStatus = "现货" | "预售" | "补货中" | "售罄";
 export interface ColorOption {
   name: string;
   hex: string;
+  thumb: string;
 }
 
 export interface Product {
@@ -26,15 +27,29 @@ export interface Product {
   isFeatured?: boolean;
 }
 
+const t = (id: string) => `https://images.unsplash.com/photo-${id}?w=120&h=160&fit=crop&auto=format`;
+const img = (id: string) => `https://images.unsplash.com/photo-${id}?w=600&h=800&fit=crop&auto=format`;
+
 const IMGS = {
-  dress1: "https://images.unsplash.com/photo-1563780352462-b04a1154f434?w=600&h=800&fit=crop&auto=format",
-  dress2: "https://images.unsplash.com/photo-1602629339830-b7848e2ff629?w=600&h=800&fit=crop&auto=format",
-  dress3: "https://images.unsplash.com/photo-1615262239202-b8baf40fe5cf?w=600&h=800&fit=crop&auto=format",
-  dress4: "https://images.unsplash.com/photo-1777274151754-928ee653275d?w=600&h=800&fit=crop&auto=format",
-  shirt1: "https://images.unsplash.com/photo-1777462985111-9da64fb2e6e6?w=600&h=800&fit=crop&auto=format",
-  shirt2: "https://images.unsplash.com/photo-1612889002991-fbfaf775d231?w=600&h=800&fit=crop&auto=format",
-  model1: "https://images.unsplash.com/photo-1590515675566-587084683363?w=600&h=800&fit=crop&auto=format",
-  model2: "https://images.unsplash.com/photo-1781834962175-eafa584cd450?w=600&h=800&fit=crop&auto=format",
+  dress1:  img("1563780352462-b04a1154f434"),
+  dress2:  img("1602629339830-b7848e2ff629"),
+  dress3:  img("1615262239202-b8baf40fe5cf"),
+  dress4:  img("1777274151754-928ee653275d"),
+  shirt1:  img("1777462985111-9da64fb2e6e6"),
+  shirt2:  img("1612889002991-fbfaf775d231"),
+  model1:  img("1590515675566-587084683363"),
+  model2:  img("1781834962175-eafa584cd450"),
+};
+
+const THUMBS = {
+  dress1:  t("1563780352462-b04a1154f434"),
+  dress2:  t("1602629339830-b7848e2ff629"),
+  dress3:  t("1615262239202-b8baf40fe5cf"),
+  dress4:  t("1777274151754-928ee653275d"),
+  shirt1:  t("1777462985111-9da64fb2e6e6"),
+  shirt2:  t("1612889002991-fbfaf775d231"),
+  model1:  t("1590515675566-587084683363"),
+  model2:  t("1781834962175-eafa584cd450"),
 };
 
 export const PRODUCTS: Product[] = [
@@ -52,9 +67,9 @@ export const PRODUCTS: Product[] = [
     image: IMGS.dress1,
     images: [IMGS.dress1, IMGS.model2, IMGS.dress2],
     colors: [
-      { name: "墨色", hex: "#2c2826" },
-      { name: "藕粉", hex: "#d9b8b0" },
-      { name: "烟青", hex: "#8fa89a" },
+      { name: "墨色", hex: "#2c2826", thumb: THUMBS.dress1 },
+      { name: "藕粉", hex: "#d9b8b0", thumb: THUMBS.model2 },
+      { name: "烟青", hex: "#8fa89a", thumb: THUMBS.dress2 },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     material: "香云纱 · 100% 桑蚕丝",
@@ -76,9 +91,9 @@ export const PRODUCTS: Product[] = [
     image: IMGS.shirt1,
     images: [IMGS.shirt1, IMGS.shirt2, IMGS.model1],
     colors: [
-      { name: "象牙白", hex: "#f5f0e8" },
-      { name: "月灰", hex: "#c8c4bc" },
-      { name: "深靛", hex: "#2d3a5a" },
+      { name: "象牙白", hex: "#f5f0e8", thumb: THUMBS.shirt1 },
+      { name: "月灰",   hex: "#c8c4bc", thumb: THUMBS.shirt2 },
+      { name: "深靛",   hex: "#2d3a5a", thumb: THUMBS.model1 },
     ],
     sizes: ["S", "M", "L", "XL"],
     material: "19mm 桑蚕丝素缎",
@@ -99,9 +114,9 @@ export const PRODUCTS: Product[] = [
     image: IMGS.dress4,
     images: [IMGS.dress4, IMGS.dress3, IMGS.model2],
     colors: [
-      { name: "胭脂红", hex: "#c0392b" },
-      { name: "祖母绿", hex: "#1a6b4a" },
-      { name: "墨黑", hex: "#1a1a1a" },
+      { name: "胭脂红", hex: "#c0392b", thumb: THUMBS.dress4 },
+      { name: "祖母绿", hex: "#1a6b4a", thumb: THUMBS.dress3 },
+      { name: "墨黑",   hex: "#1a1a1a", thumb: THUMBS.model2 },
     ],
     sizes: ["XS", "S", "M", "L"],
     material: "22mm 重磅真丝素绉缎",
@@ -119,10 +134,10 @@ export const PRODUCTS: Product[] = [
     stock: "现货",
     stockQty: 32,
     image: IMGS.dress3,
-    images: [IMGS.dress3, IMGS.dress1, IMGS.model1],
+    images: [IMGS.dress3, IMGS.dress1],
     colors: [
-      { name: "黑棕", hex: "#3a2e28" },
-      { name: "米驼", hex: "#c9b99a" },
+      { name: "黑棕", hex: "#3a2e28", thumb: THUMBS.dress3 },
+      { name: "米驼", hex: "#c9b99a", thumb: THUMBS.dress1 },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     material: "香云纱 · 纯手工整理",
@@ -143,9 +158,9 @@ export const PRODUCTS: Product[] = [
     image: IMGS.shirt2,
     images: [IMGS.shirt2, IMGS.shirt1, IMGS.model2],
     colors: [
-      { name: "象牙", hex: "#f0ead8" },
-      { name: "烟灰", hex: "#9a9590" },
-      { name: "藏青", hex: "#1c2d44" },
+      { name: "象牙", hex: "#f0ead8", thumb: THUMBS.shirt2 },
+      { name: "烟灰", hex: "#9a9590", thumb: THUMBS.shirt1 },
+      { name: "藏青", hex: "#1c2d44", thumb: THUMBS.model2 },
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     material: "16mm 桑蚕丝双绉",
@@ -163,10 +178,10 @@ export const PRODUCTS: Product[] = [
     stock: "补货中",
     stockQty: 6,
     image: IMGS.model1,
-    images: [IMGS.model1, IMGS.dress2, IMGS.shirt2],
+    images: [IMGS.model1, IMGS.dress2],
     colors: [
-      { name: "烟紫", hex: "#7a6b8a" },
-      { name: "水绿", hex: "#7aada8" },
+      { name: "烟紫", hex: "#7a6b8a", thumb: THUMBS.model1 },
+      { name: "水绿", hex: "#7aada8", thumb: THUMBS.dress2 },
     ],
     sizes: ["S", "M", "L", "XL"],
     material: "香云纱外层 · 桑蚕丝里衬",
@@ -186,8 +201,8 @@ export const PRODUCTS: Product[] = [
     image: IMGS.dress2,
     images: [IMGS.dress2, IMGS.dress1, IMGS.model1],
     colors: [
-      { name: "杏色", hex: "#e8c99a" },
-      { name: "黑棕", hex: "#2a2320" },
+      { name: "杏色", hex: "#e8c99a", thumb: THUMBS.dress2 },
+      { name: "黑棕", hex: "#2a2320", thumb: THUMBS.dress1 },
     ],
     sizes: ["XS", "S", "M", "L"],
     material: "香云纱 · 手工珠边",
@@ -208,9 +223,9 @@ export const PRODUCTS: Product[] = [
     image: IMGS.model2,
     images: [IMGS.model2, IMGS.shirt1, IMGS.dress3],
     colors: [
-      { name: "藕粉", hex: "#e0c4bc" },
-      { name: "象牙", hex: "#f2ede0" },
-      { name: "深蓝", hex: "#1e3050" },
+      { name: "藕粉", hex: "#e0c4bc", thumb: THUMBS.model2 },
+      { name: "象牙", hex: "#f2ede0", thumb: THUMBS.shirt1 },
+      { name: "深蓝", hex: "#1e3050", thumb: THUMBS.dress3 },
     ],
     sizes: ["M", "L", "XL", "XXL"],
     material: "22mm 桑蚕丝素绉缎",
@@ -221,8 +236,8 @@ export const PRODUCTS: Product[] = [
 export const CATEGORIES = ["全部", "香云纱", "新中式", "真丝旗袍", "真丝休闲"];
 
 export const STOCK_COLOR: Record<StockStatus, { text: string; bg: string }> = {
-  "现货": { text: "#2d7a4a", bg: "#e8f5ee" },
-  "预售": { text: "#7a5a2d", bg: "#f5ede0" },
+  "现货":  { text: "#2d7a4a", bg: "#e8f5ee" },
+  "预售":  { text: "#7a5a2d", bg: "#f5ede0" },
   "补货中": { text: "#5a6a7a", bg: "#e8edf2" },
-  "售罄": { text: "#9a4040", bg: "#f5e8e8" },
+  "售罄":  { text: "#9a4040", bg: "#f5e8e8" },
 };
