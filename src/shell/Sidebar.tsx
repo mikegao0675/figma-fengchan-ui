@@ -29,7 +29,8 @@ const groups: NavGroup[] = [
   {
     label: "商品管理",
     items: [
-      { to: "/profit", label: "商品利润", icon: "◎" },
+      { to: "/profit",   label: "商品利润", icon: "◎" },
+      { to: "/catalog",  label: "货盘展示", icon: "◫" },
     ],
   },
   {
