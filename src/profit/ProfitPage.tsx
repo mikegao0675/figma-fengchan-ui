@@ -3,7 +3,7 @@ import ProfitTable from "./ProfitTable";
 
 export default function ProfitPage() {
   return (
-    <div style={{ minHeight: "100vh", background: "#0c0c0c", color: "#f0f0f0" }}>
+    <div style={{ minHeight: "100vh", background: "var(--bg)", color: "var(--text-primary)" }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: "20px 16px 80px" }} className="md:px-8 md:py-6">
         <CostSourceBanner />
         <SectionLabel label="今日实时利润概览" sub="净销售数据实时更新 · 成本数据待接入后计算" />
@@ -20,15 +20,15 @@ function CostSourceBanner() {
     <div style={{
       display: "flex", alignItems: "center", justifyContent: "space-between",
       padding: "10px 16px", marginBottom: 20,
-      background: "rgba(96,165,250,0.05)",
+      background: "var(--info-sub)",
       border: "1px solid rgba(96,165,250,0.15)",
       borderRadius: 8, flexWrap: "wrap", gap: 8,
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
         <span style={{ fontSize: 14 }}>💰</span>
         <div>
-          <span style={{ fontSize: 12, fontWeight: 600, color: "#60a5fa" }}>成本价尚未接入</span>
-          <span style={{ fontSize: 11, color: "#3a3a3a", marginLeft: 8 }}>
+          <span style={{ fontSize: 12, fontWeight: 600, color: "var(--info)" }}>成本价尚未接入</span>
+          <span style={{ fontSize: 13, color: "var(--text-faint)", marginLeft: 8 }}>
             商品净成本需录入采购/生产成本后才能计算利润；净销售金额实时可查
           </span>
         </div>
@@ -36,7 +36,7 @@ function CostSourceBanner() {
       <button style={{
         padding: "5px 14px", borderRadius: 4,
         background: "rgba(96,165,250,0.1)", border: "1px solid rgba(96,165,250,0.25)",
-        color: "#60a5fa", fontSize: 11, fontWeight: 700, cursor: "pointer",
+        color: "var(--info)", fontSize: 13, fontWeight: 700, cursor: "pointer",
       }}>
         去录入成本价 →
       </button>
@@ -47,9 +47,9 @@ function CostSourceBanner() {
 export function SectionLabel({ label, sub }: { label: string; sub?: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-      <h2 style={{ margin: 0, fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", color: "#555", textTransform: "uppercase" }}>{label}</h2>
-      {sub && <span style={{ fontSize: 11, color: "#333" }}>{sub}</span>}
-      <div style={{ flex: 1, height: 1, background: "#1a1a1a" }} />
+      <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, letterSpacing: "0.14em", color: "var(--text-muted)", textTransform: "uppercase" }}>{label}</h2>
+      {sub && <span style={{ fontSize: 13, color: "var(--border-strong)" }}>{sub}</span>}
+      <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
     </div>
   );
 }

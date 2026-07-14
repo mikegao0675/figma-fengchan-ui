@@ -16,12 +16,12 @@ function Tag({ text, onRemove }: { text: string; onRemove?: () => void }) {
     <span style={{
       display: "inline-flex", alignItems: "center", gap: 5,
       padding: "2px 8px", borderRadius: 3,
-      background: "#1e1e1e", border: "1px solid #2a2a2a",
-      fontSize: 11, color: "#888",
+      background: "var(--surface-raised)", border: "1px solid #2a2a2a",
+      fontSize: 13, color: "var(--text-muted)",
     }}>
       {text}
       {onRemove && (
-        <button onClick={onRemove} style={{ background: "none", border: "none", color: "#444", cursor: "pointer", fontSize: 12, lineHeight: 1, padding: 0 }}>×</button>
+        <button onClick={onRemove} style={{ background: "none", border: "none", color: "var(--text-faint)", cursor: "pointer", fontSize: 12, lineHeight: 1, padding: 0 }}>×</button>
       )}
     </span>
   );
@@ -39,17 +39,17 @@ function CheckRow({
     }}>
       <div style={{
         width: 15, height: 15, borderRadius: 3, flexShrink: 0,
-        border: `1.5px solid ${checked ? "#f0f0f0" : "#2e2e2e"}`,
-        background: checked ? "#f0f0f0" : "transparent",
+        border: `1.5px solid ${checked ? "var(--text-primary)" : "var(--border-strong)"}`,
+        background: checked ? "var(--text-primary)" : "transparent",
         display: "flex", alignItems: "center", justifyContent: "center",
         transition: "all 0.12s",
       }}>
-        {checked && <span style={{ color: "#0c0c0c", fontSize: 10, fontWeight: 700, lineHeight: 1 }}>✓</span>}
+        {checked && <span style={{ color: "var(--bg)", fontSize: 12, fontWeight: 700, lineHeight: 1 }}>✓</span>}
       </div>
       <input type="checkbox" checked={checked} onChange={onChange} style={{ display: "none" }} />
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 12, color: "#ccc", fontFamily: "monospace" }}>{label}</div>
-        {sub && <div style={{ fontSize: 10, color: "#444", marginTop: 2 }}>{sub}</div>}
+        <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "monospace" }}>{label}</div>
+        {sub && <div style={{ fontSize: 12, color: "var(--text-faint)", marginTop: 2 }}>{sub}</div>}
       </div>
     </label>
   );
@@ -98,8 +98,8 @@ export default function GroupPanel({ onClose }: Props) {
         flex: 1, padding: "8px 0",
         background: "none", border: "none", cursor: "pointer",
         fontSize: 12, fontWeight: tab === t ? 600 : 400,
-        color: tab === t ? "#f0f0f0" : "#444",
-        borderBottom: `2px solid ${tab === t ? "#f0f0f0" : "transparent"}`,
+        color: tab === t ? "var(--text-primary)" : "var(--text-faint)",
+        borderBottom: `2px solid ${tab === t ? "var(--text-primary)" : "transparent"}`,
         transition: "all 0.12s",
       }}
     >{label}</button>
@@ -117,7 +117,7 @@ export default function GroupPanel({ onClose }: Props) {
       <div style={{
         position: "fixed", top: 0, right: 0, bottom: 0,
         width: "min(420px, 100vw)",
-        background: "#111", borderLeft: "1px solid #1e1e1e",
+        background: "var(--surface)", borderLeft: "1px solid #1e1e1e",
         zIndex: 60, display: "flex", flexDirection: "column",
         animation: "slideInRight 0.22s ease-out",
       }}>
@@ -127,8 +127,8 @@ export default function GroupPanel({ onClose }: Props) {
           display: "flex", alignItems: "center", justifyContent: "space-between",
           borderBottom: "1px solid #1e1e1e",
         }}>
-          <span style={{ fontSize: 14, fontWeight: 700, color: "#f0f0f0", letterSpacing: "0.04em" }}>管理分组</span>
-          <button onClick={onClose} style={{ background: "none", border: "none", color: "#444", fontSize: 20, cursor: "pointer", lineHeight: 1 }}>×</button>
+          <span style={{ fontSize: 14, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "0.04em" }}>管理分组</span>
+          <button onClick={onClose} style={{ background: "none", border: "none", color: "var(--text-faint)", fontSize: 20, cursor: "pointer", lineHeight: 1 }}>×</button>
         </div>
 
         {/* Tabs */}
@@ -147,28 +147,28 @@ export default function GroupPanel({ onClose }: Props) {
               {groups.map((g) => (
                 <div key={g.id} style={{
                   padding: "12px 14px",
-                  background: "#141414", border: "1px solid #1e1e1e", borderRadius: 6,
+                  background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 6,
                   marginBottom: 6,
                 }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                     <div>
-                      <div style={{ fontSize: 13, fontWeight: 600, color: "#e0e0e0" }}>{g.name}</div>
-                      <div style={{ fontSize: 11, color: "#444", marginTop: 3 }}>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{g.name}</div>
+                      <div style={{ fontSize: 13, color: "var(--text-faint)", marginTop: 3 }}>
                         {g.kols.length} 个达人号 · {g.stores.length} 家店铺
                       </div>
                     </div>
                     <div style={{ display: "flex", gap: 6 }}>
                       <button style={{
-                        padding: "3px 10px", borderRadius: 3, fontSize: 11,
+                        padding: "3px 10px", borderRadius: 3, fontSize: 13,
                         background: "none", border: "1px solid #2a2a2a",
-                        color: "#666", cursor: "pointer",
+                        color: "var(--text-muted)", cursor: "pointer",
                       }}>编辑</button>
                       <button
                         onClick={() => handleDelete(g.id)}
                         style={{
-                          padding: "3px 10px", borderRadius: 3, fontSize: 11,
+                          padding: "3px 10px", borderRadius: 3, fontSize: 13,
                           background: "none", border: "1px solid #2a2a2a",
-                          color: "#555", cursor: "pointer",
+                          color: "var(--text-muted)", cursor: "pointer",
                         }}
                       >删除</button>
                     </div>
@@ -176,13 +176,13 @@ export default function GroupPanel({ onClose }: Props) {
                   <div style={{ marginTop: 8, display: "flex", flexWrap: "wrap", gap: 4 }}>
                     {g.kols.slice(0, 4).map((k) => <Tag key={k} text={k} />)}
                     {g.kols.length > 4 && (
-                      <span style={{ fontSize: 10, color: "#333", alignSelf: "center" }}>+{g.kols.length - 4} 个</span>
+                      <span style={{ fontSize: 12, color: "var(--border-strong)", alignSelf: "center" }}>+{g.kols.length - 4} 个</span>
                     )}
                   </div>
                 </div>
               ))}
               {groups.length === 0 && (
-                <div style={{ textAlign: "center", padding: "40px 0", color: "#333", fontSize: 12 }}>暂无分组，点击「新建分组」创建</div>
+                <div style={{ textAlign: "center", padding: "40px 0", color: "var(--border-strong)", fontSize: 12 }}>暂无分组，点击「新建分组」创建</div>
               )}
             </div>
           )}
@@ -192,15 +192,15 @@ export default function GroupPanel({ onClose }: Props) {
             <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
               {/* Name input */}
               <div>
-                <label style={{ fontSize: 11, color: "#555", letterSpacing: "0.06em", display: "block", marginBottom: 6 }}>分组名称 *</label>
+                <label style={{ fontSize: 13, color: "var(--text-muted)", letterSpacing: "0.06em", display: "block", marginBottom: 6 }}>分组名称 *</label>
                 <input
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   placeholder="如：苏苏工作室"
                   style={{
                     width: "100%", padding: "9px 12px",
-                    background: "#141414", border: "1px solid #2a2a2a", borderRadius: 6,
-                    color: "#f0f0f0", fontSize: 13,
+                    background: "var(--surface)", border: "1px solid #2a2a2a", borderRadius: 6,
+                    color: "var(--text-primary)", fontSize: 13,
                     outline: "none", fontFamily: "inherit",
                     boxSizing: "border-box",
                   }}
@@ -210,7 +210,7 @@ export default function GroupPanel({ onClose }: Props) {
               {/* KOL picker */}
               <div>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
-                  <label style={{ fontSize: 11, color: "#555", letterSpacing: "0.06em" }}>归属达人号 <span style={{ color: "#333" }}>({selKols.size} 已选)</span></label>
+                  <label style={{ fontSize: 13, color: "var(--text-muted)", letterSpacing: "0.06em" }}>归属达人号 <span style={{ color: "var(--border-strong)" }}>({selKols.size} 已选)</span></label>
                 </div>
                 <input
                   value={kolSearch}
@@ -218,13 +218,13 @@ export default function GroupPanel({ onClose }: Props) {
                   placeholder="搜索达人号…"
                   style={{
                     width: "100%", padding: "7px 10px", marginBottom: 8,
-                    background: "#141414", border: "1px solid #1e1e1e", borderRadius: 5,
-                    color: "#888", fontSize: 12, outline: "none", fontFamily: "inherit",
+                    background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 5,
+                    color: "var(--text-muted)", fontSize: 12, outline: "none", fontFamily: "inherit",
                     boxSizing: "border-box",
                   }}
                 />
                 <div style={{
-                  background: "#0e0e0e", border: "1px solid #1e1e1e", borderRadius: 6,
+                  background: "var(--bg)", border: "1px solid #1e1e1e", borderRadius: 6,
                   maxHeight: 200, overflowY: "auto", padding: "0 12px",
                 }}>
                   {filteredKols.map((k) => (
@@ -235,7 +235,7 @@ export default function GroupPanel({ onClose }: Props) {
                     />
                   ))}
                   {filteredKols.length === 0 && (
-                    <div style={{ padding: "12px 0", fontSize: 11, color: "#333", textAlign: "center" }}>无匹配结果</div>
+                    <div style={{ padding: "12px 0", fontSize: 13, color: "var(--border-strong)", textAlign: "center" }}>无匹配结果</div>
                   )}
                 </div>
                 {/* Selected tags */}
@@ -250,9 +250,9 @@ export default function GroupPanel({ onClose }: Props) {
 
               {/* Store picker */}
               <div>
-                <label style={{ fontSize: 11, color: "#555", letterSpacing: "0.06em", display: "block", marginBottom: 6 }}>归属店铺 <span style={{ color: "#333" }}>({selStores.size} 已选)</span></label>
+                <label style={{ fontSize: 13, color: "var(--text-muted)", letterSpacing: "0.06em", display: "block", marginBottom: 6 }}>归属店铺 <span style={{ color: "var(--border-strong)" }}>({selStores.size} 已选)</span></label>
                 <div style={{
-                  background: "#0e0e0e", border: "1px solid #1e1e1e", borderRadius: 6,
+                  background: "var(--bg)", border: "1px solid #1e1e1e", borderRadius: 6,
                   padding: "0 12px",
                 }}>
                   {ALL_STORES.map((s) => (
@@ -278,7 +278,7 @@ export default function GroupPanel({ onClose }: Props) {
           {tab === "unclaimed" && (
             <div>
               <div style={{ marginBottom: 20 }}>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#444", textTransform: "uppercase", marginBottom: 10 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", color: "var(--text-faint)", textTransform: "uppercase", marginBottom: 10 }}>
                   未分组达人号 ({UNGROUPED_KOLS.length})
                 </div>
                 {UNGROUPED_KOLS.map((k) => (
@@ -287,17 +287,17 @@ export default function GroupPanel({ onClose }: Props) {
                     padding: "10px 0", borderBottom: "1px solid #1a1a1a",
                   }}>
                     <div>
-                      <div style={{ fontSize: 12, color: "#aaa", fontFamily: "monospace" }}>{k.kolId}</div>
-                      <div style={{ fontSize: 10, color: "#3a3a3a", marginTop: 2 }}>
+                      <div style={{ fontSize: 12, color: "var(--text-secondary)", fontFamily: "monospace" }}>{k.kolId}</div>
+                      <div style={{ fontSize: 12, color: "var(--text-faint)", marginTop: 2 }}>
                         {k.platform} · 最近出现 {k.lastSeen} · ¥{k.sales.toLocaleString()}
                       </div>
                     </div>
                     <button
                       onClick={() => setTab("new")}
                       style={{
-                        padding: "4px 10px", borderRadius: 3, fontSize: 11,
+                        padding: "4px 10px", borderRadius: 3, fontSize: 13,
                         background: "none", border: "1px solid #2a2a2a",
-                        color: "#666", cursor: "pointer", whiteSpace: "nowrap",
+                        color: "var(--text-muted)", cursor: "pointer", whiteSpace: "nowrap",
                       }}
                     >认领 →</button>
                   </div>
@@ -305,7 +305,7 @@ export default function GroupPanel({ onClose }: Props) {
               </div>
 
               <div>
-                <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#444", textTransform: "uppercase", marginBottom: 10 }}>
+                <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.1em", color: "var(--text-faint)", textTransform: "uppercase", marginBottom: 10 }}>
                   未分组店铺 ({UNGROUPED_STORES.length})
                 </div>
                 {UNGROUPED_STORES.map((s) => (
@@ -314,17 +314,17 @@ export default function GroupPanel({ onClose }: Props) {
                     padding: "10px 0", borderBottom: "1px solid #1a1a1a",
                   }}>
                     <div>
-                      <div style={{ fontSize: 12, color: "#aaa" }}>{s.storeName}</div>
-                      <div style={{ fontSize: 10, color: "#3a3a3a", marginTop: 2 }}>
+                      <div style={{ fontSize: 12, color: "var(--text-secondary)" }}>{s.storeName}</div>
+                      <div style={{ fontSize: 12, color: "var(--text-faint)", marginTop: 2 }}>
                         {s.platform} · ¥{s.sales.toLocaleString()}
                       </div>
                     </div>
                     <button
                       onClick={() => setTab("new")}
                       style={{
-                        padding: "4px 10px", borderRadius: 3, fontSize: 11,
+                        padding: "4px 10px", borderRadius: 3, fontSize: 13,
                         background: "none", border: "1px solid #2a2a2a",
-                        color: "#666", cursor: "pointer", whiteSpace: "nowrap",
+                        color: "var(--text-muted)", cursor: "pointer", whiteSpace: "nowrap",
                       }}
                     >认领 →</button>
                   </div>
@@ -345,7 +345,7 @@ export default function GroupPanel({ onClose }: Props) {
               style={{
                 flex: 1, padding: "10px", borderRadius: 6,
                 background: "none", border: "1px solid #2a2a2a",
-                color: "#555", fontSize: 13, fontWeight: 600, cursor: "pointer",
+                color: "var(--text-muted)", fontSize: 13, fontWeight: 600, cursor: "pointer",
               }}
             >取消</button>
             <button
@@ -353,9 +353,9 @@ export default function GroupPanel({ onClose }: Props) {
               disabled={!newName.trim() || saving}
               style={{
                 flex: 2, padding: "10px", borderRadius: 6,
-                background: newName.trim() ? "#f0f0f0" : "#1e1e1e",
+                background: newName.trim() ? "var(--text-primary)" : "var(--surface-raised)",
                 border: "none",
-                color: newName.trim() ? "#0c0c0c" : "#333",
+                color: newName.trim() ? "var(--bg)" : "var(--border-strong)",
                 fontSize: 13, fontWeight: 700, cursor: newName.trim() ? "pointer" : "not-allowed",
                 transition: "all 0.15s",
               }}

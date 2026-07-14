@@ -93,17 +93,17 @@ const buckets: Bucket[] = [
 ];
 
 const urgencyColor: Record<string, string> = {
-  critical: "#f87171",
-  high: "#fb923c",
+  critical: "var(--danger)",
+  high: "var(--warn)",
   mid: "#fbbf24",
   low: "#a3e635",
-  safe: "#34d399",
-  planning: "#555",
+  safe: "var(--success)",
+  planning: "var(--text-muted)",
 };
 
 const urgencyBg: Record<string, string> = {
-  critical: "rgba(248,113,113,0.08)",
-  high: "rgba(251,146,60,0.08)",
+  critical: "var(--danger-sub)",
+  high: "var(--warn-sub)",
   mid: "rgba(251,191,36,0.06)",
   low: "rgba(163,230,53,0.06)",
   safe: "rgba(52,211,153,0.06)",
@@ -116,7 +116,7 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
   const [expanded, setExpanded] = useState<string | null>(null);
 
   return (
-    <div style={{ background: "#141414", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
       {/* Column headers */}
       <div style={{
         display: "grid",
@@ -126,7 +126,7 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
         borderBottom: "1px solid #1a1a1a",
       }}>
         {["时长分桶", "预估处罚金额", "单数", "SKU数", "操作建议", ""].map((h) => (
-          <span key={h} style={{ fontSize: 10, color: "#444", fontWeight: 600, letterSpacing: "0.06em" }}>{h}</span>
+          <span key={h} style={{ fontSize: 12, color: "var(--text-faint)", fontWeight: 600, letterSpacing: "0.06em" }}>{h}</span>
         ))}
       </div>
 
@@ -151,7 +151,7 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
                 alignItems: "center",
               }}
               onMouseEnter={(e) => {
-                if (!isOpen) (e.currentTarget as HTMLElement).style.background = "#181818";
+                if (!isOpen) (e.currentTarget as HTMLElement).style.background = "var(--surface-raised)";
               }}
               onMouseLeave={(e) => {
                 if (!isOpen) (e.currentTarget as HTMLElement).style.background = "transparent";
@@ -162,8 +162,8 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
                 <div style={{ width: 8, height: 8, borderRadius: "50%", background: color, flexShrink: 0,
                   boxShadow: b.urgency === "critical" ? `0 0 8px ${color}` : "none" }} />
                 <div>
-                  <p style={{ margin: 0, fontSize: 13, fontWeight: 700, color: "#ddd" }}>{b.label}</p>
-                  <p style={{ margin: 0, fontSize: 10, color: "#444", marginTop: 1 }}>{b.sub}</p>
+                  <p style={{ margin: 0, fontSize: 13, fontWeight: 700, color: "var(--text-secondary)" }}>{b.label}</p>
+                  <p style={{ margin: 0, fontSize: 12, color: "var(--text-faint)", marginTop: 1 }}>{b.sub}</p>
                 </div>
               </div>
 
@@ -174,7 +174,7 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
                     ¥{b.amount.toLocaleString()}
                   </span>
                 </div>
-                <div style={{ height: 5, background: "#1e1e1e", borderRadius: 3, overflow: "hidden" }}>
+                <div style={{ height: 5, background: "var(--surface-raised)", borderRadius: 3, overflow: "hidden" }}>
                   <div style={{
                     height: "100%", width: `${barPct}%`, background: color,
                     borderRadius: 3, transition: "width 0.5s ease",
@@ -184,26 +184,26 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
               </div>
 
               {/* Order count */}
-              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#ccc" }}>{b.orders}</span>
+              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--text-secondary)" }}>{b.orders}</span>
 
               {/* SKU count */}
-              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#888" }}>{b.skus}</span>
+              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)" }}>{b.skus}</span>
 
               {/* Tip */}
-              <span style={{ fontSize: 10, color: "#555", lineHeight: 1.4 }}>{b.tip}</span>
+              <span style={{ fontSize: 12, color: "var(--text-muted)", lineHeight: 1.4 }}>{b.tip}</span>
 
               {/* Expand chevron */}
-              <span style={{ fontSize: 12, color: "#444", transform: isOpen ? "rotate(90deg)" : "none", display: "inline-block", transition: "transform 0.15s", textAlign: "center" }}>›</span>
+              <span style={{ fontSize: 12, color: "var(--text-faint)", transform: isOpen ? "rotate(90deg)" : "none", display: "inline-block", transition: "transform 0.15s", textAlign: "center" }}>›</span>
             </div>
 
             {/* Expanded sample orders */}
             {isOpen && (
               <div style={{ background: bg, borderTop: `1px solid ${color}22`, padding: "0 18px 12px 46px" }}>
                 {b.sampleOrders.length === 0 ? (
-                  <p style={{ fontSize: 11, color: "#444", paddingTop: 10 }}>暂无需下钻的订单</p>
+                  <p style={{ fontSize: 13, color: "var(--text-faint)", paddingTop: 10 }}>暂无需下钻的订单</p>
                 ) : (
                   <>
-                    <p style={{ fontSize: 10, color: "#444", paddingTop: 10, marginBottom: 6, fontWeight: 600, letterSpacing: "0.06em" }}>样本订单（点击查看详情）</p>
+                    <p style={{ fontSize: 12, color: "var(--text-faint)", paddingTop: 10, marginBottom: 6, fontWeight: 600, letterSpacing: "0.06em" }}>样本订单（点击查看详情）</p>
                     <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
                       {b.sampleOrders.map((o) => o && (
                         <button
@@ -212,26 +212,26 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
                           style={{
                             display: "flex", alignItems: "center", justifyContent: "space-between",
                             padding: "9px 12px",
-                            background: "#111", border: `1px solid #222`,
+                            background: "var(--surface)", border: `1px solid #222`,
                             borderRadius: 6, cursor: "pointer", textAlign: "left",
                             transition: "border-color 0.1s",
                           }}
                           onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = color; }}
-                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "#222"; }}
+                          onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border)"; }}
                         >
                           <div style={{ display: "flex", gap: 12, alignItems: "center", minWidth: 0 }}>
-                            <span className="mono" style={{ fontSize: 11, color: "#555", flexShrink: 0 }}>{o.orderId}</span>
-                            <span style={{ fontSize: 12, color: "#bbb", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{o.product}</span>
-                            <span style={{ fontSize: 11, color: "#444", flexShrink: 0 }}>{o.platform}</span>
+                            <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)", flexShrink: 0 }}>{o.orderId}</span>
+                            <span style={{ fontSize: 12, color: "var(--text-muted)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{o.product}</span>
+                            <span style={{ fontSize: 13, color: "var(--text-faint)", flexShrink: 0 }}>{o.platform}</span>
                           </div>
                           <div style={{ display: "flex", alignItems: "center", gap: 10, flexShrink: 0 }}>
-                            <span style={{ fontSize: 10, color: "#555" }}>{o.overdue}</span>
+                            <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{o.overdue}</span>
                             <span className="mono" style={{ fontSize: 14, fontWeight: 700, color }}>¥{o.penalty}</span>
-                            <span style={{ fontSize: 12, color: "#333" }}>›</span>
+                            <span style={{ fontSize: 12, color: "var(--border-strong)" }}>›</span>
                           </div>
                         </button>
                       ))}
-                      <button style={{ fontSize: 11, color: color, background: "transparent", border: "none", cursor: "pointer", textAlign: "left", paddingLeft: 12 }}>
+                      <button style={{ fontSize: 13, color: color, background: "transparent", border: "none", cursor: "pointer", textAlign: "left", paddingLeft: 12 }}>
                         查看全部 {b.orders} 单 →
                       </button>
                     </div>
@@ -244,9 +244,9 @@ export default function PenaltyBuckets({ onDrill }: { onDrill: (o: DrillOrder) =
       })}
 
       {/* Footer total */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 18px", background: "#0e0e0e", borderTop: "1px solid #1a1a1a" }}>
-        <span style={{ fontSize: 11, color: "#444" }}>合计 {buckets.reduce((s, b) => s + b.orders, 0)} 单 · {buckets.reduce((s, b) => s + b.skus, 0)} SKU</span>
-        <span className="mono" style={{ fontSize: 16, fontWeight: 800, color: "#f87171" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "12px 18px", background: "var(--bg)", borderTop: "1px solid #1a1a1a" }}>
+        <span style={{ fontSize: 13, color: "var(--text-faint)" }}>合计 {buckets.reduce((s, b) => s + b.orders, 0)} 单 · {buckets.reduce((s, b) => s + b.skus, 0)} SKU</span>
+        <span className="mono" style={{ fontSize: 16, fontWeight: 800, color: "var(--danger)" }}>
           ¥{buckets.reduce((s, b) => s + b.amount, 0).toLocaleString()} 预估总处罚
         </span>
       </div>

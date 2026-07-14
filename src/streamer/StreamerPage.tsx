@@ -17,26 +17,26 @@ function StatCard({
 }) {
   return (
     <div style={{
-      background: "#141414",
-      border: `1px solid ${accent ? "rgba(248,113,113,0.25)" : "#222"}`,
+      background: "var(--surface)",
+      border: `1px solid ${accent ? "rgba(248,113,113,0.25)" : "var(--border)"}`,
       borderRadius: 8,
       padding: "16px 18px",
       display: "flex", flexDirection: "column", gap: 6,
       minWidth: 0,
     }}>
-      <div style={{ fontSize: 11, color: "#444", letterSpacing: "0.08em", fontWeight: 600 }}>{label}</div>
+      <div style={{ fontSize: 13, color: "var(--text-faint)", letterSpacing: "0.08em", fontWeight: 600 }}>{label}</div>
       <div
         className="mono"
         style={{
           fontSize: 22, fontWeight: 700, letterSpacing: "-0.02em",
-          color: accent ? "#f87171" : "#f0f0f0",
+          color: accent ? "var(--danger)" : "var(--text-primary)",
           lineHeight: 1,
         }}
       >{value}</div>
-      {sub && <div style={{ fontSize: 11, color: "#3a3a3a" }}>{sub}</div>}
+      {sub && <div style={{ fontSize: 13, color: "var(--text-faint)" }}>{sub}</div>}
       {note && (
         <div style={{
-          fontSize: 10, color: "#c0392b",
+          fontSize: 12, color: "#c0392b",
           display: "flex", alignItems: "center", gap: 4, marginTop: 2,
         }}>
           <span>⚠</span>{note}
@@ -49,9 +49,9 @@ function StatCard({
 function SectionLabel({ label, sub }: { label: string; sub?: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-      <h2 style={{ margin: 0, fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", color: "#555", textTransform: "uppercase" }}>{label}</h2>
-      {sub && <span style={{ fontSize: 11, color: "#333" }}>{sub}</span>}
-      <div style={{ flex: 1, height: 1, background: "#1a1a1a" }} />
+      <h2 style={{ margin: 0, fontSize: 13, fontWeight: 700, letterSpacing: "0.14em", color: "var(--text-muted)", textTransform: "uppercase" }}>{label}</h2>
+      {sub && <span style={{ fontSize: 13, color: "var(--border-strong)" }}>{sub}</span>}
+      <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
     </div>
   );
 }
@@ -92,37 +92,37 @@ export default function StreamerPage() {
   );
 
   return (
-    <div style={{ background: "#0c0c0c", color: "#f0f0f0", minHeight: "100%" }}>
+    <div style={{ background: "var(--bg)", color: "var(--text-primary)", minHeight: "100%" }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: "20px 16px 80px" }} className="md:px-8 md:py-6">
 
         {/* ── Top operation bar ── */}
         <div style={{
           display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center",
           marginBottom: 20,
-          background: "#141414", border: "1px solid #1e1e1e", borderRadius: 8,
+          background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 8,
           padding: "12px 16px",
         }}>
           {/* Date range */}
           <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-            <span style={{ fontSize: 11, color: "#444" }}>统计区间</span>
+            <span style={{ fontSize: 13, color: "var(--text-faint)" }}>统计区间</span>
             <input
               type="date"
               value={dateFrom}
               onChange={(e) => { setDateFrom(e.target.value); setQuickRange(0 as QuickRange); }}
               style={{
                 padding: "5px 8px", borderRadius: 4, border: "1px solid #2a2a2a",
-                background: "#0e0e0e", color: "#888", fontSize: 12, outline: "none",
+                background: "var(--bg)", color: "var(--text-muted)", fontSize: 12, outline: "none",
                 fontFamily: "inherit",
               }}
             />
-            <span style={{ fontSize: 11, color: "#333" }}>—</span>
+            <span style={{ fontSize: 13, color: "var(--border-strong)" }}>—</span>
             <input
               type="date"
               value={dateTo}
               onChange={(e) => { setDateTo(e.target.value); setQuickRange(0 as QuickRange); }}
               style={{
                 padding: "5px 8px", borderRadius: 4, border: "1px solid #2a2a2a",
-                background: "#0e0e0e", color: "#888", fontSize: 12, outline: "none",
+                background: "var(--bg)", color: "var(--text-muted)", fontSize: 12, outline: "none",
                 fontFamily: "inherit",
               }}
             />
@@ -137,8 +137,8 @@ export default function StreamerPage() {
                 style={{
                   padding: "5px 12px", borderRadius: 4, fontSize: 12, fontWeight: 600,
                   border: "1px solid #2a2a2a",
-                  background: quickRange === d ? "#f0f0f0" : "transparent",
-                  color: quickRange === d ? "#0c0c0c" : "#555",
+                  background: quickRange === d ? "var(--text-primary)" : "transparent",
+                  color: quickRange === d ? "var(--bg)" : "var(--text-muted)",
                   cursor: "pointer", transition: "all 0.12s",
                 }}
               >近{d}天</button>
@@ -153,7 +153,7 @@ export default function StreamerPage() {
             style={{
               padding: "6px 14px", borderRadius: 5, fontSize: 12, fontWeight: 600,
               background: "transparent", border: "1px solid #333",
-              color: "#888", cursor: "pointer",
+              color: "var(--text-muted)", cursor: "pointer",
               display: "flex", alignItems: "center", gap: 6,
             }}
           >
@@ -170,7 +170,7 @@ export default function StreamerPage() {
             style={{
               padding: "6px 14px", borderRadius: 5, fontSize: 12, fontWeight: 600,
               background: "transparent", border: "1px solid #2a2a2a",
-              color: "#555", cursor: "pointer",
+              color: "var(--text-muted)", cursor: "pointer",
               display: "flex", alignItems: "center", gap: 6,
               transition: "color 0.15s",
             }}
@@ -228,7 +228,7 @@ export default function StreamerPage() {
         <div style={{
           marginTop: 24, padding: "10px 14px",
           borderTop: "1px solid #1a1a1a",
-          fontSize: 10, color: "#2e2e2e", lineHeight: 1.8,
+          fontSize: 12, color: "var(--border-strong)", lineHeight: 1.8,
         }}>
           数据口径：含已配送、已签收状态订单；退款率 = 退款订单数 ÷ 总订单数；销售额为实付金额（已扣优惠券/运费）；主播归因依据达人号关联规则匹配，未匹配订单计入「未分组」；统计时区 UTC+8；数据延迟约 15 分钟。
         </div>

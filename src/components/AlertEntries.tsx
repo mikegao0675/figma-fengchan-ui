@@ -41,9 +41,9 @@ const alerts: Alert[] = [
 ];
 
 const severityStyle: Record<string, { border: string; badge: string; badgeText: string; dot: string }> = {
-  high: { border: "#f87171", badge: "rgba(248,113,113,0.12)", badgeText: "#f87171", dot: "#f87171" },
-  mid:  { border: "#fb923c", badge: "rgba(251,146,60,0.12)", badgeText: "#fb923c", dot: "#fb923c" },
-  low:  { border: "#444", badge: "rgba(100,100,100,0.12)", badgeText: "#888", dot: "#666" },
+  high: { border: "var(--danger)", badge: "rgba(248,113,113,0.12)", badgeText: "var(--danger)", dot: "var(--danger)" },
+  mid:  { border: "var(--warn)", badge: "rgba(251,146,60,0.12)", badgeText: "var(--warn)", dot: "var(--warn)" },
+  low:  { border: "var(--text-faint)", badge: "rgba(100,100,100,0.12)", badgeText: "var(--text-muted)", dot: "var(--text-muted)" },
 };
 
 export default function AlertEntries() {
@@ -59,8 +59,8 @@ export default function AlertEntries() {
           <div
             key={a.key}
             style={{
-              background: "#141414",
-              border: `1px solid ${isOpen ? s.border : "#1e1e1e"}`,
+              background: "var(--surface)",
+              border: `1px solid ${isOpen ? s.border : "var(--surface-raised)"}`,
               borderRadius: 8,
               overflow: "hidden",
               transition: "border-color 0.15s",
@@ -84,21 +84,21 @@ export default function AlertEntries() {
 
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: "#f0f0f0" }}>{a.label}</span>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-primary)" }}>{a.label}</span>
                   <span style={{
-                    fontSize: 10, fontWeight: 700,
+                    fontSize: 12, fontWeight: 700,
                     background: s.badge, color: s.badgeText,
                     border: `1px solid ${s.border}33`,
                     borderRadius: 4, padding: "1px 6px",
                   }}>{a.count}</span>
                 </div>
-                <p style={{ fontSize: 11, color: "#555", margin: 0, marginTop: 2 }}>{a.desc}</p>
+                <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0, marginTop: 2 }}>{a.desc}</p>
               </div>
 
               <div style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0 }}>
                 <div style={{ width: 6, height: 6, borderRadius: "50%", background: s.dot,
                   boxShadow: a.severity === "high" ? `0 0 6px ${s.dot}` : "none" }} />
-                <span style={{ fontSize: 10, color: "#444", transform: isOpen ? "rotate(90deg)" : "none", display: "inline-block", transition: "transform 0.15s" }}>›</span>
+                <span style={{ fontSize: 12, color: "var(--text-faint)", transform: isOpen ? "rotate(90deg)" : "none", display: "inline-block", transition: "transform 0.15s" }}>›</span>
               </div>
             </button>
 
@@ -108,14 +108,14 @@ export default function AlertEntries() {
                   {a.items.map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8 }}>
                       <div style={{ width: 3, height: 3, borderRadius: "50%", background: s.dot, marginTop: 6, flexShrink: 0 }} />
-                      <span style={{ fontSize: 11, color: "#888", lineHeight: 1.5 }}>{item}</span>
+                      <span style={{ fontSize: 13, color: "var(--text-muted)", lineHeight: 1.5 }}>{item}</span>
                     </div>
                   ))}
                 </div>
                 <button style={{
                   marginTop: 10, padding: "6px 14px",
                   background: s.badge, border: `1px solid ${s.border}44`,
-                  borderRadius: 6, color: s.badgeText, fontSize: 11, fontWeight: 600,
+                  borderRadius: 6, color: s.badgeText, fontSize: 13, fontWeight: 600,
                   cursor: "pointer",
                 }}>
                   查看全部 →

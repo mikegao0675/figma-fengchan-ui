@@ -36,21 +36,21 @@ const ALL_ROWS: LogRow[] = [
 const TAB_ORDER: LogStatus[] = ["全部", "无物流", "未揽收", "在途", "派送中", "已签收", "停更", "异常"];
 
 const STATUS_STYLE: Record<string, { color: string; bg: string }> = {
-  "全部":   { color: "#888",   bg: "#1e1e1e" },
-  "无物流": { color: "#555",   bg: "#1a1a1a" },
-  "未揽收": { color: "#8a8a8a",bg: "#1e1e1e" },
-  "在途":   { color: "#60a5fa",bg: "rgba(96,165,250,0.1)" },
+  "全部":   { color: "var(--text-muted)",   bg: "var(--surface-raised)" },
+  "无物流": { color: "var(--text-muted)",   bg: "var(--border)" },
+  "未揽收": { color: "var(--text-muted)",bg: "var(--surface-raised)" },
+  "在途":   { color: "var(--info)",bg: "rgba(96,165,250,0.1)" },
   "派送中": { color: "#a78bfa",bg: "rgba(167,139,250,0.1)" },
-  "已签收": { color: "#34d399",bg: "rgba(52,211,153,0.1)" },
-  "停更":   { color: "#fb923c",bg: "rgba(251,146,60,0.1)" },
-  "异常":   { color: "#f87171",bg: "rgba(248,113,113,0.1)" },
+  "已签收": { color: "var(--success)",bg: "rgba(52,211,153,0.1)" },
+  "停更":   { color: "var(--warn)",bg: "rgba(251,146,60,0.1)" },
+  "异常":   { color: "var(--danger)",bg: "rgba(248,113,113,0.1)" },
 };
 
 const ORDER_STATUS_STYLE: Record<string, string> = {
-  "待发货":   "#fb923c",
-  "已发货":   "#60a5fa",
-  "发货超时": "#f87171",
-  "已完成":   "#34d399",
+  "待发货":   "var(--warn)",
+  "已发货":   "var(--info)",
+  "发货超时": "var(--danger)",
+  "已完成":   "var(--success)",
 };
 
 export default function LogisticsTable() {
@@ -73,7 +73,7 @@ export default function LogisticsTable() {
   });
 
   return (
-    <div style={{ background: "#141414", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
 
       {/* Tab bar + search */}
       <div style={{ borderBottom: "1px solid #1a1a1a" }}>
@@ -96,13 +96,13 @@ export default function LogisticsTable() {
                   transition: "color 0.12s",
                 }}
               >
-                <span style={{ fontSize: 12, fontWeight: isActive ? 700 : 400, color: isActive ? s.color : "#444" }}>{tab}</span>
+                <span style={{ fontSize: 12, fontWeight: isActive ? 700 : 400, color: isActive ? s.color : "var(--text-faint)" }}>{tab}</span>
                 {cnt > 0 && (
                   <span style={{
-                    fontSize: 10, fontWeight: 700, minWidth: 18, textAlign: "center",
+                    fontSize: 12, fontWeight: 700, minWidth: 18, textAlign: "center",
                     padding: "1px 5px", borderRadius: 9999,
-                    color: isActive ? s.color : "#444",
-                    background: isActive ? s.bg : "#1a1a1a",
+                    color: isActive ? s.color : "var(--text-faint)",
+                    background: isActive ? s.bg : "var(--border)",
                   }}>{cnt}</span>
                 )}
               </button>
@@ -113,19 +113,19 @@ export default function LogisticsTable() {
         {/* Search + filter row */}
         <div style={{ display: "flex", gap: 8, padding: "10px 16px", borderTop: "1px solid #181818" }}>
           <div style={{ position: "relative", flex: 1, maxWidth: 320 }}>
-            <span style={{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "#444", fontSize: 12 }}>⌕</span>
+            <span style={{ position: "absolute", left: 9, top: "50%", transform: "translateY(-50%)", color: "var(--text-faint)", fontSize: 12 }}>⌕</span>
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="搜索单号 / 商品名"
               style={{
                 width: "100%", paddingLeft: 28, padding: "6px 10px 6px 28px",
-                background: "#0e0e0e", border: "1px solid #222",
-                borderRadius: 4, color: "#ccc", fontSize: 12, outline: "none",
+                background: "var(--bg)", border: "1px solid #222",
+                borderRadius: 4, color: "var(--text-secondary)", fontSize: 12, outline: "none",
               }}
             />
           </div>
-          <span style={{ fontSize: 11, color: "#444", alignSelf: "center", marginLeft: 4 }}>共 {filtered.length} 条</span>
+          <span style={{ fontSize: 13, color: "var(--text-faint)", alignSelf: "center", marginLeft: 4 }}>共 {filtered.length} 条</span>
         </div>
       </div>
 
@@ -139,14 +139,14 @@ export default function LogisticsTable() {
         minWidth: 760,
       }}>
         {["内部单号", "物流单号", "物流公司", "物流状态", "订单状态", "最新轨迹", "更新时间"].map((h) => (
-          <span key={h} style={{ fontSize: 10, color: "#3a3a3a", fontWeight: 700, letterSpacing: "0.06em" }}>{h}</span>
+          <span key={h} style={{ fontSize: 12, color: "var(--text-faint)", fontWeight: 700, letterSpacing: "0.06em" }}>{h}</span>
         ))}
       </div>
 
       {/* Rows */}
       <div style={{ overflowX: "auto", minWidth: 760 }}>
         {filtered.length === 0 ? (
-          <div style={{ padding: "40px", textAlign: "center", color: "#333" }}>
+          <div style={{ padding: "40px", textAlign: "center", color: "var(--border-strong)" }}>
             <p style={{ margin: 0, fontSize: 13 }}>暂无数据</p>
           </div>
         ) : (
@@ -165,57 +165,57 @@ export default function LogisticsTable() {
                     gridTemplateColumns: "160px 140px 80px 90px 90px 1fr 80px",
                     padding: "11px 16px",
                     cursor: "pointer",
-                    background: isOpen ? "#181818" : "transparent",
+                    background: isOpen ? "var(--surface-raised)" : "transparent",
                     alignItems: "center",
                     transition: "background 0.1s",
                   }}
-                  onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "#161616"; }}
+                  onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "var(--surface-raised)"; }}
                   onMouseLeave={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
                 >
                   {/* Internal ID */}
                   <div>
-                    <p className="mono" style={{ margin: 0, fontSize: 11, color: "#60a5fa" }}>{row.internalId}</p>
-                    <p style={{ margin: 0, fontSize: 10, color: "#444", marginTop: 2 }}>{row.product}</p>
+                    <p className="mono" style={{ margin: 0, fontSize: 13, color: "var(--info)" }}>{row.internalId}</p>
+                    <p style={{ margin: 0, fontSize: 12, color: "var(--text-faint)", marginTop: 2 }}>{row.product}</p>
                   </div>
 
                   {/* Tracking no */}
                   <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
                     {row.trackingNo !== "—" ? (
-                      <span className="mono" style={{ fontSize: 11, color: "#888" }}>{row.trackingNo.slice(0, 12)}</span>
+                      <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)" }}>{row.trackingNo.slice(0, 12)}</span>
                     ) : (
-                      <span style={{ fontSize: 11, color: "#2a2a2a", fontStyle: "italic" }}>未填写</span>
+                      <span style={{ fontSize: 13, color: "var(--border-strong)", fontStyle: "italic" }}>未填写</span>
                     )}
                   </div>
 
                   {/* Carrier */}
-                  <span style={{ fontSize: 12, color: row.carrier !== "—" ? "#aaa" : "#2a2a2a" }}>{row.carrier}</span>
+                  <span style={{ fontSize: 12, color: row.carrier !== "—" ? "var(--text-secondary)" : "var(--border-strong)" }}>{row.carrier}</span>
 
                   {/* Log status chip */}
                   <span style={{
-                    display: "inline-block", fontSize: 11, fontWeight: 700,
+                    display: "inline-block", fontSize: 13, fontWeight: 700,
                     padding: "2px 8px", borderRadius: 9999,
                     color: ls.color, background: ls.bg,
                   }}>{row.logStatus}</span>
 
                   {/* Order status */}
                   <span style={{
-                    fontSize: 11, fontWeight: 600,
-                    color: ORDER_STATUS_STYLE[row.orderStatus] ?? "#888",
+                    fontSize: 13, fontWeight: 600,
+                    color: ORDER_STATUS_STYLE[row.orderStatus] ?? "var(--text-muted)",
                   }}>{row.orderStatus}</span>
 
                   {/* Last event */}
                   <div>
-                    <p style={{ margin: 0, fontSize: 11, color: isStale ? "#555" : "#aaa" }}>{row.lastEvent}</p>
+                    <p style={{ margin: 0, fontSize: 13, color: isStale ? "var(--text-muted)" : "var(--text-secondary)" }}>{row.lastEvent}</p>
                     {!row.hasPending && (
-                      <p style={{ margin: 0, fontSize: 9, color: "#2e2e2e", marginTop: 2 }}>轨迹源待接入</p>
+                      <p style={{ margin: 0, fontSize: 12, color: "var(--border-strong)", marginTop: 2 }}>轨迹源待接入</p>
                     )}
                   </div>
 
                   {/* Last update */}
                   <div style={{ textAlign: "right" }}>
-                    <p className="mono" style={{ margin: 0, fontSize: 10, color: isStale ? "#555" : "#555" }}>{row.lastUpdate}</p>
+                    <p className="mono" style={{ margin: 0, fontSize: 12, color: isStale ? "var(--text-muted)" : "var(--text-muted)" }}>{row.lastUpdate}</p>
                     {row.staleDays && (
-                      <p style={{ margin: 0, fontSize: 9, fontWeight: 700, color: row.staleDays >= 4 ? "#f87171" : "#fb923c", marginTop: 2 }}>
+                      <p style={{ margin: 0, fontSize: 12, fontWeight: 700, color: row.staleDays >= 4 ? "var(--danger)" : "var(--warn)", marginTop: 2 }}>
                         停更 {row.staleDays}天
                       </p>
                     )}
@@ -224,11 +224,11 @@ export default function LogisticsTable() {
 
                 {/* Expanded row — timeline placeholder */}
                 {isOpen && (
-                  <div style={{ padding: "12px 16px 16px 32px", background: "#0f0f0f", borderTop: "1px solid #181818" }}>
+                  <div style={{ padding: "12px 16px 16px 32px", background: "var(--bg)", borderTop: "1px solid #181818" }}>
                     <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
                       {/* Timeline */}
                       <div style={{ flex: 1, minWidth: 240 }}>
-                        <p style={{ margin: "0 0 10px", fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#444" }}>物流轨迹</p>
+                        <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", color: "var(--text-faint)" }}>物流轨迹</p>
                         {row.hasPending ? (
                           <TrackingTimeline row={row} />
                         ) : (
@@ -237,7 +237,7 @@ export default function LogisticsTable() {
                       </div>
                       {/* Order meta */}
                       <div style={{ width: 200, flexShrink: 0 }}>
-                        <p style={{ margin: "0 0 10px", fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", color: "#444" }}>订单信息</p>
+                        <p style={{ margin: "0 0 10px", fontSize: 12, fontWeight: 700, letterSpacing: "0.08em", color: "var(--text-faint)" }}>订单信息</p>
                         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                           {[
                             ["商品", row.product],
@@ -246,15 +246,15 @@ export default function LogisticsTable() {
                             ["内部单号", row.internalId],
                           ].map(([k, v]) => (
                             <div key={k} style={{ display: "flex", justifyContent: "space-between" }}>
-                              <span style={{ fontSize: 11, color: "#444" }}>{k}</span>
-                              <span className="mono" style={{ fontSize: 11, color: "#888" }}>{v}</span>
+                              <span style={{ fontSize: 13, color: "var(--text-faint)" }}>{k}</span>
+                              <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)" }}>{v}</span>
                             </div>
                           ))}
                         </div>
                         <button style={{
                           marginTop: 12, width: "100%", padding: "7px",
-                          background: "#1a1a1a", border: "1px solid #222",
-                          borderRadius: 5, color: "#888", fontSize: 11, fontWeight: 600, cursor: "pointer",
+                          background: "var(--border)", border: "1px solid #222",
+                          borderRadius: 5, color: "var(--text-muted)", fontSize: 13, fontWeight: 600, cursor: "pointer",
                         }}>
                           查看完整订单 →
                         </button>
@@ -269,11 +269,11 @@ export default function LogisticsTable() {
       </div>
 
       {/* Footer */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", borderTop: "1px solid #181818", background: "#0e0e0e" }}>
-        <span style={{ fontSize: 11, color: "#3a3a3a" }}>共 {ALL_ROWS.length} 条物流记录</span>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 16px", borderTop: "1px solid #181818", background: "var(--bg)" }}>
+        <span style={{ fontSize: 13, color: "var(--text-faint)" }}>共 {ALL_ROWS.length} 条物流记录</span>
         <div style={{ display: "flex", gap: 12 }}>
-          {[["停更", "#fb923c", counts["停更"] ?? 0], ["异常", "#f87171", counts["异常"] ?? 0]].map(([label, color, cnt]) => (
-            <span key={label as string} style={{ fontSize: 11, color: color as string }}>
+          {[["停更", "var(--warn)", counts["停更"] ?? 0], ["异常", "var(--danger)", counts["异常"] ?? 0]].map(([label, color, cnt]) => (
+            <span key={label as string} style={{ fontSize: 13, color: color as string }}>
               {label} {cnt as number} 单
             </span>
           ))}
@@ -310,14 +310,14 @@ function TrackingTimeline({ row }: { row: LogRow }) {
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", flexShrink: 0 }}>
             <div style={{
               width: 8, height: 8, borderRadius: "50%", marginTop: 3,
-              background: ev.highlight ? "#f87171" : ev.stale ? "#fb923c" : "#333",
+              background: ev.highlight ? "var(--danger)" : ev.stale ? "var(--warn)" : "var(--border-strong)",
               boxShadow: ev.highlight ? "0 0 6px #f87171" : "none",
             }} />
-            {i < events.length - 1 && <div style={{ width: 1, height: 20, background: "#1e1e1e", marginTop: 2 }} />}
+            {i < events.length - 1 && <div style={{ width: 1, height: 20, background: "var(--surface-raised)", marginTop: 2 }} />}
           </div>
           <div style={{ paddingBottom: 16 }}>
-            <p style={{ margin: 0, fontSize: 11, color: ev.highlight ? "#f87171" : ev.stale ? "#555" : "#888" }}>{ev.text}</p>
-            <p className="mono" style={{ margin: 0, fontSize: 9, color: "#333", marginTop: 2 }}>{ev.time}</p>
+            <p style={{ margin: 0, fontSize: 13, color: ev.highlight ? "var(--danger)" : ev.stale ? "var(--text-muted)" : "var(--text-muted)" }}>{ev.text}</p>
+            <p className="mono" style={{ margin: 0, fontSize: 12, color: "var(--border-strong)", marginTop: 2 }}>{ev.time}</p>
           </div>
         </div>
       ))}
@@ -329,14 +329,14 @@ function TrackingTimeline({ row }: { row: LogRow }) {
 function PendingPlaceholder({ label }: { label: string }) {
   return (
     <div style={{
-      padding: "14px", background: "#141414",
+      padding: "14px", background: "var(--surface)",
       border: "1px dashed #1e1e1e", borderRadius: 6,
       display: "flex", alignItems: "center", gap: 8,
     }}>
       <span style={{ fontSize: 16, opacity: 0.4 }}>🔌</span>
       <div>
-        <p style={{ margin: 0, fontSize: 11, color: "#3a3a3a", fontWeight: 600 }}>{label} 待接入</p>
-        <p style={{ margin: 0, fontSize: 10, color: "#2a2a2a", marginTop: 2 }}>接入快递100 / 菜鸟轨迹API后展示</p>
+        <p style={{ margin: 0, fontSize: 13, color: "var(--text-faint)", fontWeight: 600 }}>{label} 待接入</p>
+        <p style={{ margin: 0, fontSize: 12, color: "var(--border-strong)", marginTop: 2 }}>接入快递100 / 菜鸟轨迹API后展示</p>
       </div>
     </div>
   );

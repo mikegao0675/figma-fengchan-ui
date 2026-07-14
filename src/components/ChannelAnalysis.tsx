@@ -27,10 +27,10 @@ const channels: Channel[] = [
     amount: 34200,
     orders: 89,
     items: 312,
-    color: "#fb923c",
+    color: "var(--warn)",
     shops: [
-      { name: "凤婵官方旗舰店", amount: 24800, orders: 61, items: 214, color: "#fb923c" },
-      { name: "凤婵香云纱专馆", amount: 9400, orders: 28, items: 98, color: "#fb923c" },
+      { name: "凤婵官方旗舰店", amount: 24800, orders: 61, items: 214, color: "var(--warn)" },
+      { name: "凤婵香云纱专馆", amount: 9400, orders: 28, items: 98, color: "var(--warn)" },
     ],
   },
   {
@@ -38,10 +38,10 @@ const channels: Channel[] = [
     amount: 21400,
     orders: 67,
     items: 384,
-    color: "#34d399",
+    color: "var(--success)",
     shops: [
-      { name: "广州档口批发", amount: 14200, orders: 42, items: 256, color: "#34d399" },
-      { name: "1688线上批发", amount: 7200, orders: 25, items: 128, color: "#34d399" },
+      { name: "广州档口批发", amount: 14200, orders: 42, items: 256, color: "var(--success)" },
+      { name: "1688线上批发", amount: 7200, orders: 25, items: 128, color: "var(--success)" },
     ],
   },
   {
@@ -70,7 +70,7 @@ export default function ChannelAnalysis({ onDrill }: { onDrill: (t: DrillDownTar
   ];
 
   return (
-    <div style={{ background: "#141414", border: "1px solid #1e1e1e", borderRadius: 8, padding: 16, height: "100%" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 8, padding: 16, height: "100%" }}>
       {/* Tabs */}
       <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
         {tabLabels.map((t) => (
@@ -80,12 +80,12 @@ export default function ChannelAnalysis({ onDrill }: { onDrill: (t: DrillDownTar
             style={{
               padding: "4px 10px",
               borderRadius: 4,
-              fontSize: 11,
+              fontSize: 13,
               fontWeight: 600,
               border: "none",
               cursor: "pointer",
-              background: tab === t.key ? "#f0f0f0" : "#1e1e1e",
-              color: tab === t.key ? "#0c0c0c" : "#555",
+              background: tab === t.key ? "var(--text-primary)" : "var(--surface-raised)",
+              color: tab === t.key ? "var(--bg)" : "var(--text-muted)",
               transition: "all 0.15s",
             }}
           >
@@ -93,7 +93,7 @@ export default function ChannelAnalysis({ onDrill }: { onDrill: (t: DrillDownTar
           </button>
         ))}
         <div style={{ flex: 1 }} />
-        <span style={{ fontSize: 10, color: "#333", alignSelf: "center" }}>今日</span>
+        <span style={{ fontSize: 12, color: "var(--border-strong)", alignSelf: "center" }}>今日</span>
       </div>
 
       {/* Channel rows */}
@@ -113,7 +113,7 @@ export default function ChannelAnalysis({ onDrill }: { onDrill: (t: DrillDownTar
                 }}
                 style={{
                   width: "100%",
-                  background: isOpen ? "#1a1a1a" : "transparent",
+                  background: isOpen ? "var(--border)" : "transparent",
                   border: "none",
                   borderRadius: 6,
                   padding: "8px 8px",
@@ -124,17 +124,17 @@ export default function ChannelAnalysis({ onDrill }: { onDrill: (t: DrillDownTar
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                     <div style={{ width: 3, height: 14, borderRadius: 2, background: ch.color, flexShrink: 0 }} />
-                    <span style={{ fontSize: 12, color: "#ccc" }}>{ch.name}</span>
-                    {ch.shops && <span style={{ fontSize: 9, color: "#444" }}>▾</span>}
+                    <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{ch.name}</span>
+                    {ch.shops && <span style={{ fontSize: 12, color: "var(--text-faint)" }}>▾</span>}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "#f0f0f0" }}>
+                    <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }}>
                       {tab === "amount" ? `¥${(val / 10000).toFixed(1)}万` : val}
                     </span>
-                    <span style={{ fontSize: 10, color: "#444", width: 28, textAlign: "right" }}>{pct}%</span>
+                    <span style={{ fontSize: 12, color: "var(--text-faint)", width: 28, textAlign: "right" }}>{pct}%</span>
                   </div>
                 </div>
-                <div style={{ height: 3, background: "#1e1e1e", borderRadius: 2, overflow: "hidden" }}>
+                <div style={{ height: 3, background: "var(--surface-raised)", borderRadius: 2, overflow: "hidden" }}>
                   <div style={{ height: "100%", width: `${barW}%`, background: ch.color, borderRadius: 2, transition: "width 0.4s" }} />
                 </div>
               </button>
@@ -155,12 +155,12 @@ export default function ChannelAnalysis({ onDrill }: { onDrill: (t: DrillDownTar
                         }}
                       >
                         <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-                          <span style={{ fontSize: 11, color: "#666" }}>{s.name}</span>
-                          <span className="mono" style={{ fontSize: 11, color: "#888" }}>
+                          <span style={{ fontSize: 13, color: "var(--text-muted)" }}>{s.name}</span>
+                          <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)" }}>
                             {tab === "amount" ? `¥${(sv / 10000).toFixed(1)}万` : sv}
                           </span>
                         </div>
-                        <div style={{ height: 2, background: "#1e1e1e", borderRadius: 1, overflow: "hidden" }}>
+                        <div style={{ height: 2, background: "var(--surface-raised)", borderRadius: 1, overflow: "hidden" }}>
                           <div style={{ height: "100%", width: `${sbW}%`, background: ch.color, opacity: 0.5, borderRadius: 1 }} />
                         </div>
                       </button>
@@ -175,8 +175,8 @@ export default function ChannelAnalysis({ onDrill }: { onDrill: (t: DrillDownTar
 
       {/* Total */}
       <div style={{ marginTop: 16, paddingTop: 12, borderTop: "1px solid #1e1e1e", display: "flex", justifyContent: "space-between" }}>
-        <span style={{ fontSize: 11, color: "#444" }}>合计</span>
-        <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "#f0f0f0" }}>¥{total.toLocaleString()}</span>
+        <span style={{ fontSize: 13, color: "var(--text-faint)" }}>合计</span>
+        <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)" }}>¥{total.toLocaleString()}</span>
       </div>
     </div>
   );

@@ -10,11 +10,11 @@ import type { DrillDownTarget } from "../types";
 function SectionHeader({ label, sub }: { label: string; sub?: string }) {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-      <h2 style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.14em", color: "#555", textTransform: "uppercase", margin: 0, whiteSpace: "nowrap" }}>
+      <h2 style={{ fontSize: 13, fontWeight: 700, letterSpacing: "0.14em", color: "var(--text-muted)", textTransform: "uppercase", margin: 0, whiteSpace: "nowrap" }}>
         {label}
       </h2>
-      {sub && <span style={{ fontSize: 11, color: "#333" }}>{sub}</span>}
-      <div style={{ flex: 1, height: 1, background: "#1e1e1e" }} />
+      {sub && <span style={{ fontSize: 13, color: "var(--border-strong)" }}>{sub}</span>}
+      <div style={{ flex: 1, height: 1, background: "var(--surface-raised)" }} />
     </div>
   );
 }
@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const [drillDown, setDrillDown] = useState<DrillDownTarget>(null);
 
   return (
-    <div style={{ background: "#0c0c0c", color: "#f0f0f0", minHeight: "100%" }}>
+    <div style={{ background: "var(--bg)", color: "var(--text-primary)", minHeight: "100%" }}>
       <div style={{ maxWidth: 1440, margin: "0 auto", padding: "20px 16px 80px" }} className="md:px-8 md:py-6">
 
         <SectionHeader label="核心指标" />
@@ -64,20 +64,20 @@ export default function DashboardPage() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            style={{ width: "100%", maxWidth: 480, background: "#181818", border: "1px solid #2a2a2a", borderRadius: "16px 16px 0 0", padding: 24 }}
+            style={{ width: "100%", maxWidth: 480, background: "var(--surface-raised)", border: "1px solid #2a2a2a", borderRadius: "16px 16px 0 0", padding: 24 }}
             className="md:rounded-xl"
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
               <div>
-                <p style={{ fontSize: 11, color: "#555", marginBottom: 2 }}>明细下钻</p>
+                <p style={{ fontSize: 13, color: "var(--text-muted)", marginBottom: 2 }}>明细下钻</p>
                 <p style={{ fontSize: 18, fontWeight: 600 }}>{drillDown.label}</p>
               </div>
-              <button onClick={() => setDrillDown(null)} style={{ fontSize: 24, color: "#555", background: "none", border: "none", cursor: "pointer" }}>×</button>
+              <button onClick={() => setDrillDown(null)} style={{ fontSize: 24, color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer" }}>×</button>
             </div>
-            <div style={{ background: "#1e1e1e", border: "1px solid #2a2a2a", borderRadius: 8, padding: 20, textAlign: "center" }}>
-              <p style={{ fontSize: 13, color: "#555" }}>{drillDown.type} 明细数据接入后展示</p>
+            <div style={{ background: "var(--surface-raised)", border: "1px solid #2a2a2a", borderRadius: 8, padding: 20, textAlign: "center" }}>
+              <p style={{ fontSize: 13, color: "var(--text-muted)" }}>{drillDown.type} 明细数据接入后展示</p>
             </div>
-            <button onClick={() => setDrillDown(null)} style={{ width: "100%", marginTop: 12, padding: 10, borderRadius: 8, background: "#f0f0f0", color: "#0c0c0c", fontSize: 13, fontWeight: 600, border: "none", cursor: "pointer" }}>关闭</button>
+            <button onClick={() => setDrillDown(null)} style={{ width: "100%", marginTop: 12, padding: 10, borderRadius: 8, background: "var(--text-primary)", color: "var(--bg)", fontSize: 13, fontWeight: 600, border: "none", cursor: "pointer" }}>关闭</button>
           </div>
         </div>
       )}

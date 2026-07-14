@@ -28,9 +28,9 @@ const low: Product[] = [
 ];
 
 const tiers = [
-  { key: "hot", label: "爆款", sub: "近7天销量 TOP", color: "#f87171", products: hot },
-  { key: "mid", label: "平销", sub: "正常动销", color: "#fb923c", products: mid },
-  { key: "low", label: "低销", sub: "需关注", color: "#444", products: low },
+  { key: "hot", label: "爆款", sub: "近7天销量 TOP", color: "var(--danger)", products: hot },
+  { key: "mid", label: "平销", sub: "正常动销", color: "var(--warn)", products: mid },
+  { key: "low", label: "低销", sub: "需关注", color: "var(--text-faint)", products: low },
 ];
 
 function Sparkline({ vals, color }: { vals: number[]; color: string }) {
@@ -61,26 +61,26 @@ export default function ProductTiers({ onDrill }: { onDrill: (t: DrillDownTarget
               padding: "6px 14px",
               borderRadius: 6,
               border: active === t.key ? `1px solid ${t.color}` : "1px solid #222",
-              background: active === t.key ? "#1a1a1a" : "transparent",
+              background: active === t.key ? "var(--border)" : "transparent",
               cursor: "pointer",
               transition: "all 0.15s",
             }}
           >
             <div style={{ width: 6, height: 6, borderRadius: "50%", background: t.color }} />
-            <span style={{ fontSize: 12, fontWeight: 600, color: active === t.key ? "#f0f0f0" : "#555" }}>{t.label}</span>
-            <span style={{ fontSize: 10, color: "#444" }}>{t.products.length}</span>
+            <span style={{ fontSize: 12, fontWeight: 600, color: active === t.key ? "var(--text-primary)" : "var(--text-muted)" }}>{t.label}</span>
+            <span style={{ fontSize: 12, color: "var(--text-faint)" }}>{t.products.length}</span>
           </button>
         ))}
       </div>
 
       {/* Product list */}
-      <div style={{ background: "#141414", border: "1px solid #1e1e1e", borderRadius: 8, overflow: "hidden" }}>
+      <div style={{ background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 8, overflow: "hidden" }}>
         {/* Header */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr auto auto auto", gap: 12, padding: "8px 16px", borderBottom: "1px solid #1e1e1e" }}>
-          <span style={{ fontSize: 10, color: "#444" }}>商品</span>
-          <span style={{ fontSize: 10, color: "#444", width: 56, textAlign: "right" }}>近7天</span>
-          <span style={{ fontSize: 10, color: "#444", width: 64, textAlign: "right" }}>金额</span>
-          <span style={{ fontSize: 10, color: "#444", width: 56 }}>趋势</span>
+          <span style={{ fontSize: 12, color: "var(--text-faint)" }}>商品</span>
+          <span style={{ fontSize: 12, color: "var(--text-faint)", width: 56, textAlign: "right" }}>近7天</span>
+          <span style={{ fontSize: 12, color: "var(--text-faint)", width: 64, textAlign: "right" }}>金额</span>
+          <span style={{ fontSize: 12, color: "var(--text-faint)", width: 56 }}>趋势</span>
         </div>
 
         {tier.products.map((p, i) => (
@@ -94,20 +94,20 @@ export default function ProductTiers({ onDrill }: { onDrill: (t: DrillDownTarget
               background: "transparent", border: "none", cursor: "pointer", textAlign: "left", width: "100%",
               transition: "background 0.1s",
             }}
-            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#181818"; }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--surface-raised)"; }}
             onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
           >
             <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
-              <div style={{ width: 28, height: 28, borderRadius: 4, overflow: "hidden", flexShrink: 0, background: "#222" }}>
+              <div style={{ width: 28, height: 28, borderRadius: 4, overflow: "hidden", flexShrink: 0, background: "var(--border)" }}>
                 <img src={p.img} alt={p.name} width={28} height={28} style={{ objectFit: "cover" }} />
               </div>
               <div style={{ minWidth: 0 }}>
-                <p style={{ fontSize: 12, color: "#ddd", margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</p>
-                <p style={{ fontSize: 10, color: "#444", margin: 0, marginTop: 2 }}>{p.sku}</p>
+                <p style={{ fontSize: 12, color: "var(--text-secondary)", margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.name}</p>
+                <p style={{ fontSize: 12, color: "var(--text-faint)", margin: 0, marginTop: 2 }}>{p.sku}</p>
               </div>
             </div>
-            <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "#f0f0f0", width: 56, textAlign: "right", alignSelf: "center" }}>{p.sales7d}</span>
-            <span className="mono" style={{ fontSize: 11, color: "#888", width: 64, textAlign: "right", alignSelf: "center" }}>¥{(p.amount7d / 10000).toFixed(1)}万</span>
+            <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "var(--text-primary)", width: 56, textAlign: "right", alignSelf: "center" }}>{p.sales7d}</span>
+            <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)", width: 64, textAlign: "right", alignSelf: "center" }}>¥{(p.amount7d / 10000).toFixed(1)}万</span>
             <div style={{ width: 56, alignSelf: "center" }}>
               <Sparkline vals={p.trend} color={tier.color} />
             </div>

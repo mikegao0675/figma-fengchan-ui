@@ -3,11 +3,11 @@ import { useState } from "react";
 /* ── Tier config ── */
 type Tier = "all" | "high" | "normal" | "low" | "negative";
 const TIERS: { key: Tier; label: string; sub: string; color: string; range: string }[] = [
-  { key: "all",      label: "全部",   sub: "",           color: "#888",   range: "" },
-  { key: "high",     label: "高利润款", sub: "≥20%",     color: "#34d399",range: "利润率 ≥20%" },
-  { key: "normal",   label: "普通款",  sub: "5–20%",     color: "#60a5fa",range: "利润率 5–20%" },
+  { key: "all",      label: "全部",   sub: "",           color: "var(--text-muted)",   range: "" },
+  { key: "high",     label: "高利润款", sub: "≥20%",     color: "var(--success)",range: "利润率 ≥20%" },
+  { key: "normal",   label: "普通款",  sub: "5–20%",     color: "var(--info)",range: "利润率 5–20%" },
   { key: "low",      label: "低利润款",sub: "0–5%",      color: "#fbbf24",range: "利润率 0–5%" },
-  { key: "negative", label: "负利润款",sub: "<0%",        color: "#f87171",range: "利润率 <0%" },
+  { key: "negative", label: "负利润款",sub: "<0%",        color: "var(--danger)",range: "利润率 <0%" },
 ];
 
 /* ── View dimension ── */
@@ -46,10 +46,10 @@ function PCell({ hint }: { hint?: string }) {
   return (
     <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "flex-end" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-        <span style={{ fontSize: 9, opacity: 0.3 }}>🔒</span>
+        <span style={{ fontSize: 12, opacity: 0.3 }}>🔒</span>
         <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#272727" }}>—</span>
       </div>
-      {hint && <span style={{ fontSize: 9, color: "#252525", marginTop: 1 }}>{hint}</span>}
+      {hint && <span style={{ fontSize: 12, color: "#252525", marginTop: 1 }}>{hint}</span>}
     </div>
   );
 }
@@ -59,7 +59,7 @@ function TierBadge({ tier }: { tier: Tier }) {
   const t = TIERS.find((x) => x.key === tier)!;
   return (
     <span style={{
-      fontSize: 9, fontWeight: 700, padding: "2px 6px", borderRadius: 9999,
+      fontSize: 12, fontWeight: 700, padding: "2px 6px", borderRadius: 9999,
       color: t.color, background: `${t.color}18`, border: `1px solid ${t.color}30`,
     }}>
       {t.label}
@@ -81,16 +81,16 @@ function TierSummaryCards({ activeTier, onSelect }: { activeTier: Tier; onSelect
             key={t.key}
             onClick={() => onSelect(t.key)}
             style={{
-              background: "#141414",
-              border: `1px solid ${isActive ? t.color + "60" : "#1e1e1e"}`,
+              background: "var(--surface)",
+              border: `1px solid ${isActive ? t.color + "60" : "var(--surface-raised)"}`,
               borderRadius: 8, padding: "12px 14px", textAlign: "left",
               cursor: "pointer", transition: "border-color 0.15s",
             }}
           >
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
-              <span style={{ fontSize: 12, fontWeight: 700, color: isActive ? t.color : "#888" }}>{t.label}</span>
+              <span style={{ fontSize: 12, fontWeight: 700, color: isActive ? t.color : "var(--text-muted)" }}>{t.label}</span>
               {t.sub && (
-                <span style={{ fontSize: 9, padding: "1px 5px", borderRadius: 3, color: t.color, background: `${t.color}15`, fontWeight: 600 }}>
+                <span style={{ fontSize: 12, padding: "1px 5px", borderRadius: 3, color: t.color, background: `${t.color}15`, fontWeight: 600 }}>
                   {t.sub}
                 </span>
               )}
@@ -98,24 +98,24 @@ function TierSummaryCards({ activeTier, onSelect }: { activeTier: Tier; onSelect
 
             {/* SKU count — real */}
             <div style={{ marginBottom: 6 }}>
-              <span className="mono" style={{ fontSize: 20, fontWeight: 800, color: "#ccc" }}>{tierCounts[t.key]}</span>
-              <span style={{ fontSize: 10, color: "#555", marginLeft: 3 }}>款</span>
+              <span className="mono" style={{ fontSize: 20, fontWeight: 800, color: "var(--text-secondary)" }}>{tierCounts[t.key]}</span>
+              <span style={{ fontSize: 12, color: "var(--text-muted)", marginLeft: 3 }}>款</span>
             </div>
 
             {/* Net sales — real */}
             <div style={{ marginBottom: 4 }}>
-              <p style={{ margin: 0, fontSize: 9, color: "#3a3a3a" }}>净销售</p>
-              <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: "#666" }}>
+              <p style={{ margin: 0, fontSize: 12, color: "var(--text-faint)" }}>净销售</p>
+              <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)" }}>
                 ¥{(tierSales[t.key] / 10000).toFixed(1)}万
               </span>
             </div>
 
             {/* Profit — pending */}
             <div>
-              <p style={{ margin: 0, fontSize: 9, color: "#2a2a2a" }}>预估利润</p>
+              <p style={{ margin: 0, fontSize: 12, color: "var(--border-strong)" }}>预估利润</p>
               <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
                 <span style={{ fontSize: 8, opacity: 0.3 }}>🔒</span>
-                <span className="mono" style={{ fontSize: 11, fontWeight: 700, color: "#252525" }}>—</span>
+                <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "#252525" }}>—</span>
               </div>
             </div>
           </button>
@@ -143,20 +143,20 @@ export default function ProfitTable() {
     <div>
       <TierSummaryCards activeTier={activeTier} onSelect={setActiveTier} />
 
-      <div style={{ background: "#141414", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
+      <div style={{ background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
         {/* Toolbar */}
         <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "12px 16px", borderBottom: "1px solid #1a1a1a", flexWrap: "wrap" }}>
           {/* Dimension switcher */}
-          <div style={{ display: "flex", gap: 2, background: "#0e0e0e", borderRadius: 5, padding: 2 }}>
+          <div style={{ display: "flex", gap: 2, background: "var(--bg)", borderRadius: 5, padding: 2 }}>
             {DIMS.map((d) => (
               <button
                 key={d.key}
                 onClick={() => setActiveDim(d.key)}
                 style={{
                   padding: "4px 12px", borderRadius: 4,
-                  background: activeDim === d.key ? "#1e1e1e" : "transparent",
-                  border: "none", fontSize: 11, fontWeight: activeDim === d.key ? 700 : 400,
-                  color: activeDim === d.key ? "#d0d0d0" : "#444",
+                  background: activeDim === d.key ? "var(--surface-raised)" : "transparent",
+                  border: "none", fontSize: 13, fontWeight: activeDim === d.key ? 700 : 400,
+                  color: activeDim === d.key ? "var(--text-secondary)" : "var(--text-faint)",
                   cursor: "pointer",
                 }}
               >{d.label}</button>
@@ -165,15 +165,15 @@ export default function ProfitTable() {
 
           {/* Search */}
           <div style={{ position: "relative" }}>
-            <span style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", color: "#444", fontSize: 11 }}>⌕</span>
+            <span style={{ position: "absolute", left: 8, top: "50%", transform: "translateY(-50%)", color: "var(--text-faint)", fontSize: 13 }}>⌕</span>
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="搜索商品 / SKU"
               style={{
                 paddingLeft: 24, padding: "5px 10px 5px 24px",
-                background: "#0e0e0e", border: "1px solid #222",
-                borderRadius: 4, color: "#ccc", fontSize: 11, outline: "none", width: 180,
+                background: "var(--bg)", border: "1px solid #222",
+                borderRadius: 4, color: "var(--text-secondary)", fontSize: 13, outline: "none", width: 180,
               }}
             />
           </div>
@@ -181,12 +181,12 @@ export default function ProfitTable() {
           <div style={{ flex: 1 }} />
 
           {/* Cost pending notice */}
-          <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 10px", background: "#111", border: "1px solid #1a1a1a", borderRadius: 4 }}>
-            <span style={{ fontSize: 9 }}>🔒</span>
-            <span style={{ fontSize: 10, color: "#2e2e2e", fontWeight: 600 }}>利润/成本列待接入</span>
+          <div style={{ display: "flex", alignItems: "center", gap: 5, padding: "4px 10px", background: "var(--surface)", border: "1px solid #1a1a1a", borderRadius: 4 }}>
+            <span style={{ fontSize: 12 }}>🔒</span>
+            <span style={{ fontSize: 12, color: "var(--border-strong)", fontWeight: 600 }}>利润/成本列待接入</span>
           </div>
 
-          <span style={{ fontSize: 11, color: "#3a3a3a" }}>{filtered.length} 条</span>
+          <span style={{ fontSize: 13, color: "var(--text-faint)" }}>{filtered.length} 条</span>
         </div>
 
         {/* Column header */}
@@ -204,14 +204,14 @@ export default function ProfitTable() {
               <span
                 onClick={() => sortKey && setSortBy(sortKey)}
                 style={{
-                  fontSize: 10, color: sortBy === sortKey ? "#888" : "#3a3a3a",
+                  fontSize: 12, color: sortBy === sortKey ? "var(--text-muted)" : "var(--text-faint)",
                   fontWeight: 700, letterSpacing: "0.06em",
                   cursor: sortKey ? "pointer" : "default",
                 }}
               >
                 {label}
               </span>
-              {sortKey && <span style={{ fontSize: 9, color: "#333" }}>{sortBy === sortKey ? "↓" : "↕"}</span>}
+              {sortKey && <span style={{ fontSize: 12, color: "var(--border-strong)" }}>{sortBy === sortKey ? "↓" : "↕"}</span>}
               {/* Pending indicator for cost columns */}
               {(label === "净成本" || label === "利润" || label === "利润率") && (
                 <span style={{ fontSize: 8, opacity: 0.35 }}>🔒</span>
@@ -236,41 +236,41 @@ export default function ProfitTable() {
                   alignItems: "center",
                   cursor: "pointer", transition: "background 0.1s",
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "#181818"; }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = "var(--surface-raised)"; }}
                 onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
               >
                 {/* Product */}
                 <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
-                  <div style={{ width: 36, height: 36, borderRadius: 6, overflow: "hidden", flexShrink: 0, background: "#222" }}>
+                  <div style={{ width: 36, height: 36, borderRadius: 6, overflow: "hidden", flexShrink: 0, background: "var(--border)" }}>
                     <img src={row.img} alt={row.name} width={36} height={36} style={{ objectFit: "cover" }} />
                   </div>
                   <div style={{ minWidth: 0 }}>
-                    <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "#d0d0d0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--text-secondary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
                       {row.name}
                     </p>
                     <div style={{ display: "flex", gap: 6, marginTop: 3, alignItems: "center" }}>
-                      <span className="mono" style={{ fontSize: 10, color: "#444" }}>{row.sku}</span>
+                      <span className="mono" style={{ fontSize: 12, color: "var(--text-faint)" }}>{row.sku}</span>
                       <TierBadge tier={row.tier} />
                     </div>
                   </div>
                 </div>
 
                 {/* Platform */}
-                <span style={{ fontSize: 11, color: "#666" }}>{row.platform}</span>
+                <span style={{ fontSize: 13, color: "var(--text-muted)" }}>{row.platform}</span>
 
                 {/* Net sales — real */}
                 <div>
-                  <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: "#f0f0f0" }}>
+                  <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: "var(--text-primary)" }}>
                     ¥{(row.netSales / 10000).toFixed(1)}万
                   </span>
-                  <div style={{ marginTop: 4, height: 3, background: "#1a1a1a", borderRadius: 2, overflow: "hidden" }}>
-                    <div style={{ height: "100%", width: `${salesPct}%`, background: "#444", borderRadius: 2 }} />
+                  <div style={{ marginTop: 4, height: 3, background: "var(--border)", borderRadius: 2, overflow: "hidden" }}>
+                    <div style={{ height: "100%", width: `${salesPct}%`, background: "var(--text-faint)", borderRadius: 2 }} />
                   </div>
-                  <p style={{ margin: "2px 0 0", fontSize: 9, color: "#2e2e2e" }}>{salesPct}% 占比</p>
+                  <p style={{ margin: "2px 0 0", fontSize: 12, color: "var(--border-strong)" }}>{salesPct}% 占比</p>
                 </div>
 
                 {/* Net qty — real */}
-                <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#888" }}>
+                <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--text-muted)" }}>
                   {row.netQty}
                 </span>
 
@@ -283,14 +283,14 @@ export default function ProfitTable() {
                 {/* Profit rate — pending (with tier-color ghost bar) */}
                 <div>
                   <div style={{ display: "flex", alignItems: "center", gap: 3, marginBottom: 4 }}>
-                    <span style={{ fontSize: 9, opacity: 0.25 }}>🔒</span>
-                    <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#222" }}>—%</span>
+                    <span style={{ fontSize: 12, opacity: 0.25 }}>🔒</span>
+                    <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--border)" }}>—%</span>
                   </div>
                   {/* Ghost bar showing predicted tier */}
-                  <div style={{ height: 3, background: "#1a1a1a", borderRadius: 2, overflow: "hidden" }}>
+                  <div style={{ height: 3, background: "var(--border)", borderRadius: 2, overflow: "hidden" }}>
                     <div style={{ height: "100%", width: "60%", background: tierConf.color, opacity: 0.15, borderRadius: 2 }} />
                   </div>
-                  <p style={{ margin: "2px 0 0", fontSize: 9, color: "#252525", fontStyle: "italic" }}>
+                  <p style={{ margin: "2px 0 0", fontSize: 12, color: "#252525", fontStyle: "italic" }}>
                     预测区间 {tierConf.range}
                   </p>
                 </div>
@@ -302,18 +302,18 @@ export default function ProfitTable() {
         {/* Footer */}
         <div style={{
           display: "flex", justifyContent: "space-between", alignItems: "center",
-          padding: "10px 16px", borderTop: "1px solid #181818", background: "#0e0e0e",
+          padding: "10px 16px", borderTop: "1px solid #181818", background: "var(--bg)",
           flexWrap: "wrap", gap: 8,
         }}>
           <div style={{ display: "flex", gap: 16 }}>
-            <span style={{ fontSize: 11, color: "#555" }}>净销售合计</span>
-            <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "#888" }}>
+            <span style={{ fontSize: 13, color: "var(--text-muted)" }}>净销售合计</span>
+            <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)" }}>
               ¥{(totalNetSales / 10000).toFixed(1)}万
             </span>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontSize: 9 }}>🔒</span>
-            <span style={{ fontSize: 11, color: "#2e2e2e" }}>利润合计、利润率均待成本价接入后计算</span>
+            <span style={{ fontSize: 12 }}>🔒</span>
+            <span style={{ fontSize: 13, color: "var(--border-strong)" }}>利润合计、利润率均待成本价接入后计算</span>
           </div>
         </div>
       </div>

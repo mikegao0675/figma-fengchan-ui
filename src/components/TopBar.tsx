@@ -14,7 +14,7 @@ export default function TopBar() {
   return (
     <header
       style={{
-        background: "#0c0c0c",
+        background: "var(--bg)",
         borderBottom: "1px solid #1c1c1c",
         padding: "12px 24px",
         display: "flex",
@@ -27,21 +27,21 @@ export default function TopBar() {
     >
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <div>
-          <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: "0.1em", color: "#f0f0f0" }}>FENGCHAN</div>
-          <div style={{ fontSize: 10, color: "#444", letterSpacing: "0.08em" }}>凤婵丝绸 · 数据智能</div>
+          <div style={{ fontSize: 15, fontWeight: 700, letterSpacing: "0.1em", color: "var(--text-primary)" }}>FENGCHAN</div>
+          <div style={{ fontSize: 12, color: "var(--text-faint)", letterSpacing: "0.08em" }}>凤婵丝绸 · 数据智能</div>
         </div>
-        <div style={{ width: 1, height: 28, background: "#222" }} />
-        <span style={{ fontSize: 11, color: "#555", fontWeight: 500 }}>实时数据门户</span>
+        <div style={{ width: 1, height: 28, background: "var(--border)" }} />
+        <span style={{ fontSize: 13, color: "var(--text-muted)", fontWeight: 500 }}>实时数据门户</span>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
         <div style={{ textAlign: "right" }}>
-          <div className="mono" style={{ fontSize: 18, fontWeight: 600, color: "#f0f0f0", lineHeight: 1 }}>{timeStr}</div>
-          <div style={{ fontSize: 10, color: "#444", marginTop: 2 }}>{dateStr}</div>
+          <div className="mono" style={{ fontSize: 18, fontWeight: 600, color: "var(--text-primary)", lineHeight: 1 }}>{timeStr}</div>
+          <div style={{ fontSize: 12, color: "var(--text-faint)", marginTop: 2 }}>{dateStr}</div>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#34d399" }} />
-          <span style={{ fontSize: 11, color: "#444" }}>实时</span>
+          <div style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--success)" }} />
+          <span style={{ fontSize: 13, color: "var(--text-faint)" }}>实时</span>
         </div>
       </div>
     </header>

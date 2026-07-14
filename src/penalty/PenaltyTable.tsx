@@ -56,7 +56,7 @@ export default function PenaltyTable({ onDrill }: { onDrill: (o: DrillOrder) => 
   ];
 
   return (
-    <div style={{ background: "#141414", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid #1e1e1e", borderRadius: 10, overflow: "hidden" }}>
       {/* Tabs */}
       <div style={{ display: "flex", gap: 0, borderBottom: "1px solid #1a1a1a", padding: "0 18px" }}>
         {tabs.map((t) => (
@@ -65,9 +65,9 @@ export default function PenaltyTable({ onDrill }: { onDrill: (o: DrillOrder) => 
             onClick={() => { setTab(t.key); setExpanded(null); }}
             style={{
               padding: "12px 14px", background: "transparent", border: "none",
-              borderBottom: `2px solid ${tab === t.key ? "#f87171" : "transparent"}`,
+              borderBottom: `2px solid ${tab === t.key ? "var(--danger)" : "transparent"}`,
               fontSize: 12, fontWeight: tab === t.key ? 700 : 400,
-              color: tab === t.key ? "#f0f0f0" : "#555",
+              color: tab === t.key ? "var(--text-primary)" : "var(--text-muted)",
               cursor: "pointer", whiteSpace: "nowrap",
               marginBottom: -1, transition: "color 0.12s",
             }}
@@ -75,7 +75,7 @@ export default function PenaltyTable({ onDrill }: { onDrill: (o: DrillOrder) => 
         ))}
         <div style={{ flex: 1 }} />
         <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "0 4px" }}>
-          <span style={{ fontSize: 10, color: "#3a3a3a" }}>点击行查看待发货订单</span>
+          <span style={{ fontSize: 12, color: "var(--text-faint)" }}>点击行查看待发货订单</span>
         </div>
       </div>
 
@@ -91,7 +91,7 @@ export default function PenaltyTable({ onDrill }: { onDrill: (o: DrillOrder) => 
 function THead({ cols }: { cols: string[] }) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: cols.map(() => "1fr").join(" "), padding: "8px 18px", borderBottom: "1px solid #181818" }}>
-      {cols.map((c) => <span key={c} style={{ fontSize: 10, color: "#3a3a3a", fontWeight: 700, letterSpacing: "0.06em" }}>{c}</span>)}
+      {cols.map((c) => <span key={c} style={{ fontSize: 12, color: "var(--text-faint)", fontWeight: 700, letterSpacing: "0.06em" }}>{c}</span>)}
     </div>
   );
 }
@@ -103,18 +103,18 @@ function AmountBar({ confirmed, estimated, max }: { confirmed: number; estimated
   return (
     <div>
       <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
-        <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: "#f87171" }}>¥{estimated.toLocaleString()}</span>
-        <span style={{ fontSize: 10, color: "#555" }}>预估</span>
+        <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: "var(--danger)" }}>¥{estimated.toLocaleString()}</span>
+        <span style={{ fontSize: 12, color: "var(--text-muted)" }}>预估</span>
       </div>
-      <div style={{ height: 4, background: "#1a1a1a", borderRadius: 2, marginTop: 4, overflow: "hidden" }}>
+      <div style={{ height: 4, background: "var(--border)", borderRadius: 2, marginTop: 4, overflow: "hidden" }}>
         <div style={{ height: "100%", display: "flex" }}>
-          <div style={{ width: `${confPct}%`, background: "#f87171", opacity: 0.9 }} />
-          <div style={{ width: `${estPct}%`, background: "#fb923c", opacity: 0.6 }} />
+          <div style={{ width: `${confPct}%`, background: "var(--danger)", opacity: 0.9 }} />
+          <div style={{ width: `${estPct}%`, background: "var(--warn)", opacity: 0.6 }} />
         </div>
       </div>
       <div style={{ display: "flex", gap: 8, marginTop: 3 }}>
-        <span style={{ fontSize: 9, color: "#f87171" }}>■ 已确认 ¥{confirmed.toLocaleString()}</span>
-        <span style={{ fontSize: 9, color: "#fb923c" }}>■ 预估 ¥{(estimated - confirmed).toLocaleString()}</span>
+        <span style={{ fontSize: 12, color: "var(--danger)" }}>■ 已确认 ¥{confirmed.toLocaleString()}</span>
+        <span style={{ fontSize: 12, color: "var(--warn)" }}>■ 预估 ¥{(estimated - confirmed).toLocaleString()}</span>
       </div>
     </div>
   );
@@ -141,20 +141,20 @@ function WarehouseTable({ data, expanded, setExpanded, onDrill }: {
                 background: isOpen ? "rgba(248,113,113,0.05)" : "transparent",
                 alignItems: "center", transition: "background 0.1s",
               }}
-              onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "#181818"; }}
+              onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "var(--surface-raised)"; }}
               onMouseLeave={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >
               <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <div style={{ width: 3, height: 28, background: i === 0 ? "#f87171" : i === 1 ? "#fb923c" : i === 2 ? "#fbbf24" : "#555", borderRadius: 2 }} />
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#ccc" }}>{row.name}</span>
+                <div style={{ width: 3, height: 28, background: i === 0 ? "var(--danger)" : i === 1 ? "var(--warn)" : i === 2 ? "#fbbf24" : "var(--text-muted)", borderRadius: 2 }} />
+                <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>{row.name}</span>
               </div>
               <AmountBar confirmed={row.confirmed} estimated={row.estimated} max={mx} />
-              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#ddd" }}>{row.orders}</span>
-              <span className="mono" style={{ fontSize: 13, color: "#888" }}>{row.skus}</span>
+              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--text-secondary)" }}>{row.orders}</span>
+              <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)" }}>{row.skus}</span>
               <div>
-                <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: row.rate > 4 ? "#f87171" : row.rate > 3 ? "#fb923c" : "#888" }}>{row.rate}%</span>
+                <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: row.rate > 4 ? "var(--danger)" : row.rate > 3 ? "var(--warn)" : "var(--text-muted)" }}>{row.rate}%</span>
               </div>
-              <span style={{ fontSize: 11, color: "#555" }}>{row.top}</span>
+              <span style={{ fontSize: 13, color: "var(--text-muted)" }}>{row.top}</span>
             </div>
             <DrillRows isOpen={isOpen} samples={samples} onDrill={onDrill} />
           </div>
@@ -185,15 +185,15 @@ function PlatformTable({ data, expanded, setExpanded, onDrill }: {
                 background: isOpen ? "rgba(248,113,113,0.05)" : "transparent",
                 alignItems: "center", transition: "background 0.1s",
               }}
-              onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "#181818"; }}
+              onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "var(--surface-raised)"; }}
               onMouseLeave={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >
-              <span style={{ fontSize: 13, fontWeight: 600, color: "#ccc" }}>{row.name}</span>
+              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>{row.name}</span>
               <AmountBar confirmed={row.confirmed} estimated={row.estimated} max={mx} />
-              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#ddd" }}>{row.orders}</span>
-              <span className="mono" style={{ fontSize: 13, color: "#888" }}>{row.skus}</span>
-              <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: row.rate > 5 ? "#f87171" : row.rate > 3 ? "#fb923c" : "#888" }}>{row.rate}%</span>
-              <span style={{ fontSize: 10, color: "#444", lineHeight: 1.4 }}>{row.sub}</span>
+              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--text-secondary)" }}>{row.orders}</span>
+              <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)" }}>{row.skus}</span>
+              <span className="mono" style={{ fontSize: 13, fontWeight: 700, color: row.rate > 5 ? "var(--danger)" : row.rate > 3 ? "var(--warn)" : "var(--text-muted)" }}>{row.rate}%</span>
+              <span style={{ fontSize: 12, color: "var(--text-faint)", lineHeight: 1.4 }}>{row.sub}</span>
             </div>
             <DrillRows isOpen={isOpen} samples={samples} onDrill={onDrill} />
           </div>
@@ -224,22 +224,22 @@ function ProductTable({ data, expanded, setExpanded, onDrill }: {
                 background: isOpen ? "rgba(248,113,113,0.05)" : "transparent",
                 alignItems: "center", transition: "background 0.1s",
               }}
-              onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "#181818"; }}
+              onMouseEnter={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "var(--surface-raised)"; }}
               onMouseLeave={(e) => { if (!isOpen) (e.currentTarget as HTMLElement).style.background = "transparent"; }}
             >
               <div>
-                <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "#ccc" }}>{row.name}</p>
-                <p className="mono" style={{ margin: 0, fontSize: 10, color: "#444", marginTop: 2 }}>{row.sku}</p>
+                <p style={{ margin: 0, fontSize: 13, fontWeight: 600, color: "var(--text-secondary)" }}>{row.name}</p>
+                <p className="mono" style={{ margin: 0, fontSize: 12, color: "var(--text-faint)", marginTop: 2 }}>{row.sku}</p>
               </div>
               <AmountBar confirmed={row.confirmed} estimated={row.estimated} max={mx} />
-              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "#ddd" }}>{row.orders}</span>
+              <span className="mono" style={{ fontSize: 14, fontWeight: 700, color: "var(--text-secondary)" }}>{row.orders}</span>
               <span style={{
-                fontSize: 10, padding: "2px 7px", borderRadius: 9999,
-                color: row.trend === "持续高发" ? "#f87171" : row.trend === "本周激增" ? "#fb923c" : "#555",
-                background: row.trend === "持续高发" ? "rgba(248,113,113,0.1)" : row.trend === "本周激增" ? "rgba(251,146,60,0.1)" : "#1a1a1a",
+                fontSize: 12, padding: "2px 7px", borderRadius: 9999,
+                color: row.trend === "持续高发" ? "var(--danger)" : row.trend === "本周激增" ? "var(--warn)" : "var(--text-muted)",
+                background: row.trend === "持续高发" ? "rgba(248,113,113,0.1)" : row.trend === "本周激增" ? "rgba(251,146,60,0.1)" : "var(--border)",
                 fontWeight: 600,
               }}>{row.trend}</span>
-              <span style={{ fontSize: 12, color: "#333" }}>›</span>
+              <span style={{ fontSize: 12, color: "var(--border-strong)" }}>›</span>
             </div>
             <DrillRows isOpen={isOpen} samples={samples} onDrill={onDrill} />
           </div>
@@ -255,10 +255,10 @@ function DrillRows({ isOpen, samples, onDrill }: { isOpen: boolean; samples: Dri
   return (
     <div style={{ background: "rgba(248,113,113,0.04)", borderTop: "1px solid rgba(248,113,113,0.1)", padding: "8px 18px 12px 32px" }}>
       {samples.length === 0 ? (
-        <p style={{ fontSize: 11, color: "#444", margin: "4px 0" }}>暂无代表性订单</p>
+        <p style={{ fontSize: 13, color: "var(--text-faint)", margin: "4px 0" }}>暂无代表性订单</p>
       ) : (
         <>
-          <p style={{ fontSize: 10, color: "#444", marginBottom: 6, fontWeight: 600, letterSpacing: "0.06em" }}>待处理订单 →</p>
+          <p style={{ fontSize: 12, color: "var(--text-faint)", marginBottom: 6, fontWeight: 600, letterSpacing: "0.06em" }}>待处理订单 →</p>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             {samples.map((o) => o && (
               <button
@@ -266,22 +266,22 @@ function DrillRows({ isOpen, samples, onDrill }: { isOpen: boolean; samples: Dri
                 onClick={() => onDrill(o)}
                 style={{
                   display: "flex", justifyContent: "space-between", alignItems: "center",
-                  padding: "8px 12px", background: "#111",
+                  padding: "8px 12px", background: "var(--surface)",
                   border: "1px solid #222", borderRadius: 6, cursor: "pointer",
                   transition: "border-color 0.1s",
                 }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "#f87171"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "#222"; }}
+                onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--danger)"; }}
+                onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = "var(--border)"; }}
               >
                 <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                  <span className="mono" style={{ fontSize: 11, color: "#555" }}>{o.orderId}</span>
-                  <span style={{ fontSize: 12, color: "#aaa" }}>{o.product}</span>
-                  <span style={{ fontSize: 11, color: "#444" }}>{o.overdue}</span>
+                  <span className="mono" style={{ fontSize: 13, color: "var(--text-muted)" }}>{o.orderId}</span>
+                  <span style={{ fontSize: 12, color: "var(--text-secondary)" }}>{o.product}</span>
+                  <span style={{ fontSize: 13, color: "var(--text-faint)" }}>{o.overdue}</span>
                 </div>
-                <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: "#f87171" }}>¥{o.penalty}</span>
+                <span className="mono" style={{ fontSize: 14, fontWeight: 800, color: "var(--danger)" }}>¥{o.penalty}</span>
               </button>
             ))}
-            <button style={{ fontSize: 11, color: "#f87171", background: "transparent", border: "none", cursor: "pointer", textAlign: "left", padding: "2px 0" }}>
+            <button style={{ fontSize: 13, color: "var(--danger)", background: "transparent", border: "none", cursor: "pointer", textAlign: "left", padding: "2px 0" }}>
               查看全部关联订单 →
             </button>
           </div>
