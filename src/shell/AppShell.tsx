@@ -10,6 +10,7 @@ const PAGE_META: Record<string, { label: string; group: string; badge?: { count:
   "/penalty":   { label: "处罚预警",    group: "运营预警", badge: { count: 8,  color: "#f87171" } },
   "/logistics": { label: "物流实时预警", group: "运营预警", badge: { count: 14, color: "#f87171" } },
   "/profit":    { label: "商品利润",    group: "商品管理" },
+  "/streamer":  { label: "主播分析",    group: "达人管理" },
   "/design":    { label: "设计规范",    group: "系统" },
 };
 

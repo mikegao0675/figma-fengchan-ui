@@ -27,6 +27,12 @@ const groups: NavGroup[] = [
     ],
   },
   {
+    label: "达人管理",
+    items: [
+      { to: "/streamer", label: "主播分析", icon: "◉" },
+    ],
+  },
+  {
     label: "商品管理",
     items: [
       { to: "/profit",   label: "商品利润", icon: "◎" },

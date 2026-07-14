@@ -6,6 +6,7 @@ import LogisticsPage from "./logistics/LogisticsPage";
 import ProfitPage from "./profit/ProfitPage";
 import DesignSystemPage from "./pages/DesignSystemPage";
 import CatalogPage from "./catalog/CatalogPage";
+import StreamerPage from "./streamer/StreamerPage";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="penalty" element={<PenaltyPage />} />
           <Route path="logistics" element={<LogisticsPage />} />
           <Route path="profit" element={<ProfitPage />} />
+          <Route path="streamer" element={<StreamerPage />} />
           <Route path="design" element={<DesignSystemPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
